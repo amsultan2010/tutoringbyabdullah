@@ -21,6 +21,8 @@
       --orange-dark: #9f3b0d;
       --orange-pale: #fff0e3;
       --sand: #f7efe6;
+      --shadow: 0 18px 44px rgba(92, 45, 14, 0.11);
+      --soft-shadow: 0 8px 22px rgba(92, 45, 14, 0.08);
       --radius: 8px;
       color-scheme: light;
       font-family: Georgia, "Times New Roman", Times, serif;
@@ -32,10 +34,24 @@
     body {
       margin: 0;
       color: var(--ink);
-      background: var(--paper);
+      background:
+        radial-gradient(circle at 16% 8%, rgba(233, 95, 22, 0.12), transparent 24rem),
+        radial-gradient(circle at 84% 14%, rgba(255, 176, 102, 0.16), transparent 22rem),
+        linear-gradient(180deg, #fffaf3 0%, #fff 54%, #fffaf3 100%);
       font-size: 17px;
       line-height: 1.62;
       overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(92, 45, 14, 0.035) 1px, transparent 1px);
+      background-size: 100% 34px;
+      opacity: 0.42;
     }
 
     a { color: inherit; }
@@ -44,8 +60,9 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(255, 250, 243, 0.96);
+      background: rgba(255, 250, 243, 0.9);
       border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
     }
 
     .nav-inner,
@@ -77,11 +94,12 @@
       height: 32px;
       display: grid;
       place-items: center;
-      border: 1px solid var(--orange);
+      border: 1px solid #efb384;
       border-radius: 50%;
-      color: var(--orange-dark);
-      background: var(--white);
+      color: var(--white);
+      background: var(--orange);
       font-weight: 700;
+      box-shadow: var(--soft-shadow);
     }
 
     .nav-links {
@@ -115,6 +133,8 @@
       color: var(--white);
       background: var(--orange);
       font-weight: 700;
+      box-shadow: 0 8px 18px rgba(233, 95, 22, 0.18);
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
     }
 
     .button.secondary {
@@ -127,6 +147,8 @@
       background: var(--orange-dark);
       border-color: var(--orange-dark);
       color: var(--white);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(159, 59, 13, 0.2);
     }
 
     .button.secondary:hover {
@@ -162,11 +184,31 @@
     }
 
     h1 {
+      position: relative;
       max-width: 790px;
       margin-bottom: 24px;
       font-size: clamp(3rem, 7.2vw, 6.8rem);
       line-height: 0.95;
       letter-spacing: -0.04em;
+    }
+
+    .accent-word {
+      position: relative;
+      display: inline-block;
+      color: var(--ink);
+    }
+
+    .accent-word::after {
+      content: "";
+      position: absolute;
+      left: 0.04em;
+      right: 0.02em;
+      bottom: 0.04em;
+      height: 0.13em;
+      z-index: -1;
+      border-radius: 999px;
+      background: #ffb066;
+      transform: rotate(-1.5deg);
     }
 
     h2 {
@@ -249,10 +291,32 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--white);
+      box-shadow: var(--soft-shadow);
     }
 
     .lesson-card {
+      position: relative;
       padding: 28px;
+      background:
+        linear-gradient(90deg, transparent 0 42px, rgba(233, 95, 22, 0.16) 42px 43px, transparent 43px),
+        repeating-linear-gradient(180deg, #fff 0 33px, #f0e0d1 34px),
+        var(--white);
+      transform: rotate(0.7deg);
+      box-shadow: var(--shadow);
+    }
+
+    .lesson-card::before {
+      content: "session notes";
+      position: absolute;
+      right: 18px;
+      top: -13px;
+      padding: 3px 10px;
+      border: 1px solid #efb384;
+      border-radius: 999px;
+      color: var(--orange-dark);
+      background: var(--orange-pale);
+      font-size: 0.84rem;
+      font-weight: 700;
     }
 
     .lesson-list {
@@ -276,6 +340,10 @@
       white-space: nowrap;
     }
 
+    .facts {
+      box-shadow: var(--soft-shadow);
+    }
+
     .section-heading {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
@@ -294,6 +362,14 @@
 
     .video-card {
       padding: 12px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .video-card:hover,
+    .price-card:hover,
+    .quality:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
     }
 
     .video-shell {
@@ -343,7 +419,8 @@
       flex-direction: column;
       justify-content: space-between;
       padding: clamp(24px, 4vw, 42px);
-      background: var(--sand);
+      background:
+        linear-gradient(135deg, #fff7ee 0%, #f7efe6 100%);
     }
 
     blockquote {
@@ -383,6 +460,7 @@
     .info-card.accent {
       background: var(--orange-pale);
       border-color: #f2b98f;
+      box-shadow: var(--shadow);
     }
 
     .mini-grid,
@@ -451,7 +529,7 @@
       gap: 22px;
       align-items: center;
       margin-top: 22px;
-      background: var(--sand);
+      background: linear-gradient(135deg, var(--sand), var(--orange-pale));
     }
 
     .group-prices {
@@ -468,6 +546,7 @@
     .contact-panel.primary {
       background: var(--orange-pale);
       border-color: #f2b98f;
+      box-shadow: var(--shadow);
     }
 
     .contact-title {
@@ -489,7 +568,7 @@
       text-decoration: none;
     }
 
-    footer {
+      footer {
       padding: 18px 0 46px;
       color: var(--muted);
       font-size: 0.92rem;
@@ -578,7 +657,7 @@
     <section class="section hero">
       <div>
         <div class="eyebrow">now booking | ais-r grades 9-10</div>
-        <h1>math and science tutoring that finally clicks.</h1>
+        <h1>math and science tutoring that finally <span class="accent-word">clicks.</span></h1>
         <p class="hero-copy">hi, i'm abdullah. i'm a sophomore at ais-r, one of four students in the highest math level in my grade, a 98% math placement scorer, and the person classmates ask when a topic gets weird.</p>
         <div class="hero-actions">
           <a class="button" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">message on instagram</a>
