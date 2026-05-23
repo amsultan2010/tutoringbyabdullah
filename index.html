@@ -5,25 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="math and science 10 tutoring by abdullah sultan for ais-r students. clear explanations, focused study sessions, and friendly peer support.">
   <meta property="og:title" content="abdullah sultan | math &amp; science tutoring">
-  <meta property="og:description" content="fun, focused tutoring for math i, math ii, math ii/iii, math iii, and science 10.">
+  <meta property="og:description" content="focused tutoring for math i, math ii, math ii/iii, math iii, and science 10.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#101827">
+  <meta name="theme-color" content="#fffaf3">
   <title>abdullah sultan | math &amp; science tutoring</title>
   <style>
     :root {
-      --ink: #101827;
-      --ink-soft: #405066;
-      --muted: #708095;
-      --paper: #fffaf2;
-      --panel: rgba(255, 255, 255, 0.86);
-      --line: rgba(120, 72, 22, 0.14);
-      --cream: #fff7eb;
-      --gold: #ff9f1c;
-      --orange: #f05a0a;
-      --tangerine: #ff7a1a;
-      --apricot: #ffb066;
-      --clay: #9a3412;
-      --shadow: 0 22px 70px rgba(16, 24, 39, 0.14);
+      --ink: #171412;
+      --text: #3e352f;
+      --muted: #756a61;
+      --line: #e7d8ca;
+      --paper: #fffaf3;
+      --white: #ffffff;
+      --orange: #e95f16;
+      --orange-dark: #9f3b0d;
+      --orange-pale: #fff0e3;
+      --sand: #f7efe6;
       --radius: 8px;
       color-scheme: light;
       font-family: Georgia, "Times New Roman", Times, serif;
@@ -34,43 +31,11 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
       color: var(--ink);
-      background:
-        radial-gradient(circle at 12% 16%, rgba(240, 90, 10, 0.18), transparent 28rem),
-        radial-gradient(circle at 86% 8%, rgba(255, 122, 26, 0.15), transparent 28rem),
-        radial-gradient(circle at 55% 78%, rgba(255, 159, 28, 0.1), transparent 30rem),
-        linear-gradient(135deg, #ffffff 0%, #fffaf2 54%, #fff 100%);
+      background: var(--paper);
+      font-size: 17px;
+      line-height: 1.62;
       overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(16, 24, 39, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(16, 24, 39, 0.035) 1px, transparent 1px);
-      background-size: 46px 46px;
-      mask-image: linear-gradient(to bottom, black, transparent 82%);
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      width: 18rem;
-      height: 18rem;
-      left: var(--pointer-x, 50%);
-      top: var(--pointer-y, 20%);
-      z-index: -1;
-      pointer-events: none;
-      translate: -50% -50%;
-      background: radial-gradient(circle, rgba(240, 90, 10, 0.2), transparent 68%);
-      filter: blur(8px);
-      opacity: 0.75;
-      transition: opacity 0.3s ease;
     }
 
     a { color: inherit; }
@@ -78,19 +43,23 @@
     .nav {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 20;
+      background: rgba(255, 250, 243, 0.96);
       border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(22px) saturate(145%);
+    }
+
+    .nav-inner,
+    .section,
+    footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
     }
 
     .nav-inner {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
+      min-height: 66px;
       display: flex;
       align-items: center;
-      gap: 18px;
-      min-height: 68px;
+      gap: 22px;
     }
 
     .brand {
@@ -98,43 +67,40 @@
       align-items: center;
       gap: 10px;
       margin-right: auto;
+      color: var(--ink);
       font-weight: 700;
-      letter-spacing: -0.01em;
       text-decoration: none;
     }
 
     .brand-mark {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       display: grid;
       place-items: center;
-      border-radius: 8px;
-      color: white;
-      background: conic-gradient(from 210deg, var(--orange), var(--gold), var(--apricot), var(--tangerine), var(--orange));
-      box-shadow: 0 10px 26px rgba(240, 90, 10, 0.24);
+      border: 1px solid var(--orange);
+      border-radius: 50%;
+      color: var(--orange-dark);
+      background: var(--white);
+      font-weight: 700;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.98rem;
     }
 
-    .nav-link {
-      padding: 9px 11px;
-      border-radius: 999px;
-      color: var(--ink-soft);
-      font-size: 0.92rem;
-      font-weight: 700;
+    .nav-link,
+    .nav-cta,
+    .button {
       text-decoration: none;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
 
     .nav-link:hover,
-    .nav-link.active {
-      color: var(--ink);
-      background: rgba(240, 90, 10, 0.12);
-      transform: translateY(-1px);
+    .contact-row:hover {
+      color: var(--orange-dark);
     }
 
     .nav-cta,
@@ -142,275 +108,204 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      min-height: 44px;
-      padding: 0 18px;
-      border: 0;
-      border-radius: 999px;
-      color: white;
-      background: linear-gradient(135deg, var(--orange), var(--tangerine));
-      box-shadow: 0 14px 34px rgba(240, 90, 10, 0.24);
+      min-height: 42px;
+      padding: 0 17px;
+      border: 1px solid var(--orange);
+      border-radius: var(--radius);
+      color: var(--white);
+      background: var(--orange);
       font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+    }
+
+    .button.secondary {
+      color: var(--orange-dark);
+      background: var(--white);
     }
 
     .nav-cta:hover,
     .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 42px rgba(240, 90, 10, 0.26);
-      filter: saturate(1.12);
+      background: var(--orange-dark);
+      border-color: var(--orange-dark);
+      color: var(--white);
     }
 
-    .button.secondary {
-      color: var(--ink);
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid var(--line);
-      box-shadow: none;
+    .button.secondary:hover {
+      background: var(--orange-pale);
+      color: var(--orange-dark);
     }
 
     .section {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 88px 0;
+      padding: 76px 0;
     }
 
     .hero {
-      min-height: calc(100vh - 68px);
+      min-height: calc(100vh - 66px);
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
-      gap: 44px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 46px;
       align-items: center;
-      padding-top: 72px;
+      padding-top: 54px;
     }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      width: fit-content;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      color: var(--ink-soft);
-      font-size: 0.86rem;
+      margin-bottom: 18px;
+      color: var(--orange-dark);
+      font-size: 0.95rem;
       font-weight: 700;
-      box-shadow: 0 8px 24px rgba(16, 24, 39, 0.07);
-    }
-
-    .status-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: var(--orange);
-      box-shadow: 0 0 0 6px rgba(240, 90, 10, 0.16);
     }
 
     h1,
     h2,
     h3,
-    p { margin-top: 0; }
+    p {
+      margin-top: 0;
+    }
 
     h1 {
-      max-width: 800px;
-      margin-bottom: 22px;
-      font-size: clamp(3.4rem, 8vw, 7.45rem);
-      line-height: 0.88;
-      letter-spacing: -0.04em;
-    }
-
-    .gradient-text {
-      display: inline-block;
-      background: linear-gradient(115deg, var(--clay), var(--orange) 38%, var(--tangerine) 72%, var(--gold));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-copy {
-      max-width: 680px;
-      color: var(--ink-soft);
-      font-size: clamp(1.06rem, 2vw, 1.24rem);
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 34px;
-    }
-
-    .stat {
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.68);
-      box-shadow: 0 12px 28px rgba(16, 24, 39, 0.06);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1.4rem;
-      letter-spacing: -0.015em;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.86rem;
-      font-weight: 700;
-    }
-
-    .hero-card {
-      position: relative;
-      min-height: 560px;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      border-radius: 8px;
-      background:
-        linear-gradient(150deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.46)),
-        linear-gradient(135deg, rgba(240, 90, 10, 0.14), rgba(255, 122, 26, 0.16));
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      transform-style: preserve-3d;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.8), transparent),
-        radial-gradient(circle at 75% 22%, rgba(255, 122, 26, 0.3), transparent 11rem);
-      translate: -90% 0;
-      animation: sheen 7s ease-in-out infinite;
-    }
-
-    .orbit {
-      position: absolute;
-      inset: 48px;
-      border: 1px dashed rgba(16, 24, 39, 0.18);
-      border-radius: 50%;
-      animation: spin 24s linear infinite;
-    }
-
-    .orbit.two {
-      inset: 94px 68px;
-      animation-duration: 18s;
-      animation-direction: reverse;
-    }
-
-    .formula {
-      position: absolute;
-      display: inline-flex;
-      align-items: center;
-      min-height: 48px;
-      padding: 0 16px;
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: 0 16px 36px rgba(16, 24, 39, 0.11);
-      backdrop-filter: blur(16px);
-      font-weight: 700;
-      letter-spacing: -0.015em;
-    }
-
-    .formula:nth-child(3) { left: 38px; top: 88px; transform: rotate(-5deg); }
-    .formula:nth-child(4) { right: 38px; top: 138px; transform: rotate(5deg); }
-    .formula:nth-child(5) { left: 58px; bottom: 148px; transform: rotate(4deg); }
-    .formula:nth-child(6) { right: 48px; bottom: 86px; transform: rotate(-4deg); }
-
-    .hero-note {
-      position: absolute;
-      left: 42px;
-      right: 42px;
-      bottom: 34px;
-      padding: 22px;
-      border-radius: 8px;
-      background: #101827;
-      color: white;
-      box-shadow: 0 24px 58px rgba(16, 24, 39, 0.22);
-    }
-
-    .hero-note p {
-      margin: 8px 0 0;
-      color: rgba(255, 255, 255, 0.72);
-      line-height: 1.6;
-    }
-
-    .section-heading {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      align-items: end;
-      margin-bottom: 28px;
-    }
-
-    h2 {
-      margin-bottom: 0;
-      font-size: clamp(2.2rem, 4vw, 4.4rem);
+      max-width: 790px;
+      margin-bottom: 24px;
+      font-size: clamp(3rem, 7.2vw, 6.8rem);
       line-height: 0.95;
       letter-spacing: -0.04em;
     }
 
-    .section-heading p {
-      max-width: 420px;
-      margin-bottom: 6px;
-      color: var(--ink-soft);
-      line-height: 1.65;
+    h2 {
+      max-width: 720px;
+      margin-bottom: 0;
+      font-size: clamp(2.1rem, 4.2vw, 4.2rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .hero-copy,
+    .section-heading p,
+    .quality p,
+    .price-card p,
+    .contact-panel p,
+    .group-copy,
+    .lesson-card p {
+      color: var(--text);
+    }
+
+    .hero-copy {
+      max-width: 660px;
+      font-size: clamp(1.12rem, 2vw, 1.32rem);
+    }
+
+    .hero-actions,
+    .contact-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 38px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .fact {
+      padding: 18px;
+      background: var(--white);
+    }
+
+    .fact strong,
+    .mini-stat strong,
+    .group-prices strong {
+      display: block;
+      color: var(--ink);
+      font-size: 1.35rem;
+      line-height: 1.1;
+    }
+
+    .fact span,
+    .mini-stat span,
+    .group-prices span,
+    .video-meta span,
+    .contact-row span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .lesson-card,
+    .video-card,
+    .quote-panel,
+    .info-card,
+    .quality,
+    .price-card,
+    .group-box,
+    .contact-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+    }
+
+    .lesson-card {
+      padding: 28px;
+    }
+
+    .lesson-list {
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .lesson-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .lesson-list strong {
+      color: var(--orange-dark);
+      white-space: nowrap;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+      gap: 36px;
+      align-items: end;
+      margin-bottom: 30px;
     }
 
     .video-feature {
       display: grid;
-      grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1fr);
-      gap: 24px;
+      grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1fr);
+      gap: 22px;
       align-items: stretch;
-      margin-bottom: 24px;
-    }
-
-    .video-card,
-    .quote-panel,
-    .info-card,
-    .price-card,
-    .contact-panel {
-      border: 1px solid rgba(255, 255, 255, 0.72);
-      border-radius: var(--radius);
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(24px) saturate(145%);
+      margin-bottom: 22px;
     }
 
     .video-card {
-      position: relative;
-      padding: 14px;
-      overflow: hidden;
-      transition: transform 0.28s ease, box-shadow 0.28s ease;
-    }
-
-    .video-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 30px 80px rgba(16, 24, 39, 0.17);
+      padding: 12px;
     }
 
     .video-shell {
       position: relative;
       overflow: hidden;
-      border-radius: 8px;
-      background: #08101d;
+      border-radius: 6px;
+      background: #111;
       aspect-ratio: 9 / 16;
     }
 
-    .video-card.featured .video-shell {
-      min-height: 100%;
-      aspect-ratio: 9 / 16;
+    .video-card.featured {
+      max-width: 430px;
     }
 
     iframe {
@@ -424,27 +319,22 @@
     .video-meta {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
-      padding: 13px 2px 2px;
+      gap: 12px;
+      padding-top: 12px;
     }
 
-    .video-meta strong { display: block; }
-
-    .video-meta span {
-      color: var(--muted);
-      font-size: 0.88rem;
-      font-weight: 600;
+    .video-meta strong {
+      display: block;
     }
 
     .badge {
-      width: fit-content;
       height: fit-content;
-      padding: 6px 10px;
+      padding: 3px 8px;
+      border: 1px solid var(--line);
       border-radius: 999px;
-      color: #29313f;
-      background: rgba(49, 230, 169, 0.22);
-      font-size: 0.76rem;
-      font-weight: 700;
+      color: var(--orange-dark);
+      background: var(--orange-pale);
+      font-size: 0.84rem;
       white-space: nowrap;
     }
 
@@ -452,30 +342,19 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: clamp(24px, 4vw, 44px);
-      background:
-        linear-gradient(145deg, rgba(16, 24, 39, 0.96), rgba(35, 46, 68, 0.95)),
-        radial-gradient(circle at top right, rgba(240, 90, 10, 0.4), transparent 18rem);
-      color: white;
-      overflow: hidden;
-    }
-
-    .quote-panel .eyebrow {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.16);
-      color: rgba(255, 255, 255, 0.78);
-      box-shadow: none;
+      padding: clamp(24px, 4vw, 42px);
+      background: var(--sand);
     }
 
     blockquote {
-      margin: 36px 0 26px;
-      font-size: clamp(1.35rem, 3vw, 2.35rem);
-      line-height: 1.22;
+      margin: 20px 0 22px;
+      font-size: clamp(1.35rem, 3vw, 2.3rem);
+      line-height: 1.2;
       letter-spacing: -0.02em;
     }
 
     cite {
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--muted);
       font-style: normal;
       font-weight: 700;
     }
@@ -483,7 +362,7 @@
     .video-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
+      gap: 16px;
     }
 
     .about-grid {
@@ -493,111 +372,71 @@
       align-items: stretch;
     }
 
-    .info-card {
+    .info-card,
+    .quality,
+    .price-card,
+    .group-box,
+    .contact-panel {
       padding: 24px;
     }
 
     .info-card.accent {
-      color: white;
-      background:
-        linear-gradient(135deg, rgba(194, 65, 12, 0.96), rgba(240, 90, 10, 0.9)),
-        linear-gradient(45deg, var(--clay), var(--orange));
+      background: var(--orange-pale);
+      border-color: #f2b98f;
     }
 
-    .info-card.accent p {
-      color: rgba(255, 255, 255, 0.76);
-    }
-
-    .mini-grid {
+    .mini-grid,
+    .quality-grid,
+    .pricing-grid,
+    .group-prices {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .mini-stat {
-      padding: 14px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.16);
-    }
-
-    .mini-stat strong {
-      display: block;
-      font-size: 1.35rem;
-    }
-
-    .quality-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      height: 100%;
-    }
-
-    .quality {
-      padding: 22px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid var(--line);
-      transition: transform 0.24s ease, background 0.24s ease;
-    }
-
-    .quality:hover {
-      transform: translateY(-4px);
-      background: white;
-    }
-
-    .icon {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, rgba(240, 90, 10, 0.17), rgba(255, 122, 26, 0.26));
-      font-weight: 700;
-    }
-
-    .quality h3,
-    .price-card h3 {
-      margin-bottom: 9px;
-      font-size: 1.16rem;
-      letter-spacing: -0.01em;
-    }
-
-    .quality p,
-    .price-card p,
-    .contact-panel p {
-      color: var(--ink-soft);
-      line-height: 1.62;
-      margin-bottom: 0;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 14px;
     }
 
-    .price-card {
-      position: relative;
-      padding: 22px;
-      overflow: hidden;
-      transition: transform 0.24s ease, box-shadow 0.24s ease;
+    .mini-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 24px;
     }
 
-    .price-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 28px 68px rgba(16, 24, 39, 0.14);
+    .mini-stat,
+    .group-prices div {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--white);
+    }
+
+    .quality-grid {
+      height: 100%;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--orange-dark);
+      background: var(--orange-pale);
+      font-weight: 700;
+    }
+
+    .pricing-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
     .price {
       display: flex;
       align-items: baseline;
       gap: 5px;
-      margin: 20px 0 4px;
-      font-size: 2.4rem;
+      margin: 20px 0 0;
+      color: var(--orange-dark);
+      font-size: 2.15rem;
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.025em;
     }
 
     .price span {
@@ -611,136 +450,50 @@
       grid-template-columns: 1.1fr 0.9fr;
       gap: 22px;
       align-items: center;
-      margin-top: 24px;
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.64);
-    }
-
-    .group-copy {
-      color: var(--ink-soft);
-      line-height: 1.65;
-      margin: 0;
+      margin-top: 22px;
+      background: var(--sand);
     }
 
     .group-prices {
-      display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .group-prices div {
-      padding: 15px;
-      border-radius: 8px;
-      background: #101827;
-      color: white;
-      text-align: center;
-    }
-
-    .group-prices strong {
-      display: block;
-      font-size: 1.45rem;
     }
 
     .contact {
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 24px;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
       align-items: stretch;
     }
 
-    .contact-panel {
-      padding: clamp(24px, 4vw, 40px);
-    }
-
     .contact-panel.primary {
-      color: white;
-      background:
-        radial-gradient(circle at 16% 14%, rgba(255, 122, 26, 0.35), transparent 12rem),
-        linear-gradient(140deg, #101827, #2b211a 58%, #5a2207);
-    }
-
-    .contact-panel.primary p { color: rgba(255, 255, 255, 0.72); }
-
-    .contact-panel.primary .eyebrow {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.16);
-      color: rgba(255, 255, 255, 0.78);
-      box-shadow: none;
+      background: var(--orange-pale);
+      border-color: #f2b98f;
     }
 
     .contact-title {
-      margin-top: 18px;
+      margin-top: 0;
     }
 
     .contact-list {
       display: grid;
-      gap: 12px;
-      margin-top: 22px;
+      margin-top: 24px;
     }
 
     .contact-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.76);
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
       text-decoration: none;
-      transition: transform 0.22s ease, background 0.22s ease;
-    }
-
-    .contact-row:hover {
-      transform: translateX(4px);
-      background: white;
-    }
-
-    .contact-row span {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 700;
     }
 
     footer {
-      padding: 28px 16px 48px;
+      padding: 18px 0 46px;
       color: var(--muted);
-      text-align: center;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes sheen {
-      0%, 32% { translate: -95% 0; }
-      58%, 100% { translate: 95% 0; }
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.001ms !important;
-      }
+      font-size: 0.92rem;
+      border-top: 1px solid var(--line);
     }
 
     @media (max-width: 980px) {
@@ -748,59 +501,60 @@
       .video-feature,
       .about-grid,
       .contact,
-      .group-box {
+      .group-box,
+      .section-heading {
         grid-template-columns: 1fr;
       }
 
       .hero {
         min-height: auto;
-        padding-top: 52px;
       }
 
-      .hero-card { min-height: 440px; }
-      .video-card.featured { max-width: 420px; }
-      .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .pricing-grid .price-card:last-child { grid-column: 1 / -1; }
+      .video-card.featured {
+        max-width: 420px;
+      }
+
+      .video-grid,
+      .pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 720px) {
-      .nav-inner { min-height: 62px; }
-      .nav-links { display: none; }
-      .brand span:last-child { display: none; }
-      .nav-cta { padding: 0 14px; min-height: 40px; font-size: 0.92rem; }
-      .section { width: min(100% - 24px, 1120px); padding: 58px 0; }
-      .hero { padding-top: 38px; gap: 30px; }
-      h1 { font-size: clamp(3rem, 17vw, 5rem); }
-      .stats,
+      body {
+        font-size: 16px;
+      }
+
+      .nav-inner {
+        min-height: 62px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .section {
+        width: min(100% - 24px, 1120px);
+        padding: 52px 0;
+      }
+
+      .hero {
+        padding-top: 42px;
+        gap: 28px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 16vw, 5rem);
+      }
+
+      .facts,
       .quality-grid,
-      .group-prices {
-        grid-template-columns: 1fr;
-      }
-      .section-heading {
-        display: block;
-      }
-      .section-heading p {
-        margin-top: 14px;
-      }
-      .hero-card {
-        min-height: 380px;
-      }
-      .formula {
-        min-height: 42px;
-        padding: 0 12px;
-        font-size: 0.9rem;
-      }
-      .hero-note {
-        left: 18px;
-        right: 18px;
-        bottom: 18px;
-      }
+      .group-prices,
       .video-grid,
-      .pricing-grid {
+      .pricing-grid,
+      .mini-grid {
         grid-template-columns: 1fr;
       }
-      .pricing-grid .price-card:last-child { grid-column: auto; }
     }
   </style>
 </head>
@@ -822,46 +576,44 @@
 
   <main id="top">
     <section class="section hero">
-      <div class="reveal">
-        <div class="eyebrow"><span class="status-dot"></span>now booking | ais-r grades 9-10</div>
-        <h1>math and science tutoring that finally <span class="gradient-text">clicks.</span></h1>
+      <div>
+        <div class="eyebrow">now booking | ais-r grades 9-10</div>
+        <h1>math and science tutoring that finally clicks.</h1>
         <p class="hero-copy">hi, i'm abdullah. i'm a sophomore at ais-r, one of four students in the highest math level in my grade, a 98% math placement scorer, and the person classmates ask when a topic gets weird.</p>
         <div class="hero-actions">
           <a class="button" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">message on instagram</a>
           <a class="button secondary" href="#testimonials">watch recommendations</a>
         </div>
-        <div class="stats">
-          <div class="stat"><strong>40 sar</strong><span>starting rate</span></div>
-          <div class="stat"><strong>5 courses</strong><span>math and science</span></div>
-          <div class="stat"><strong>98%</strong><span>math placement</span></div>
+        <div class="facts">
+          <div class="fact"><strong>40 sar</strong><span>starting rate</span></div>
+          <div class="fact"><strong>5 courses</strong><span>math and science</span></div>
+          <div class="fact"><strong>98%</strong><span>math placement</span></div>
         </div>
       </div>
 
-      <div class="hero-card reveal" data-tilt>
-        <div class="orbit"></div>
-        <div class="orbit two"></div>
-        <div class="formula">x = (-b +/- sqrt(d)) / 2a</div>
-        <div class="formula">cells -> systems</div>
-        <div class="formula">log rules</div>
-        <div class="formula">trig without panic</div>
-        <div class="hero-note">
-          <strong>study sessions built around your actual class.</strong>
-          <p>we use your textbook, your homework, and your upcoming tests. no stiff lectures, just clear explanations and practice that sticks.</p>
-        </div>
-      </div>
+      <aside class="lesson-card" aria-label="how sessions work">
+        <h3>how sessions work</h3>
+        <p>we work from your actual class material, slow down the parts that feel confusing, and then practice until the method feels natural.</p>
+        <ul class="lesson-list">
+          <li><span>homework help</span><strong>focused</strong></li>
+          <li><span>quiz review</span><strong>clear</strong></li>
+          <li><span>test prep</span><strong>calm</strong></li>
+          <li><span>group sessions</span><strong>up to 3</strong></li>
+        </ul>
+      </aside>
     </section>
 
     <section class="section" id="testimonials">
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <div>
-          <div class="eyebrow"><span class="status-dot"></span>5 video recommendations</div>
+          <div class="eyebrow">5 video recommendations</div>
           <h2>people who know the work.</h2>
         </div>
         <p>four student clips and one teacher recommendation are embedded directly from youtube shorts, so visitors can play them right on the page.</p>
       </div>
 
       <div class="video-feature">
-        <article class="video-card featured reveal">
+        <article class="video-card featured">
           <div class="video-shell">
             <iframe src="https://www.youtube.com/embed/8cN78bOqM8E" title="mr. senneff recommendation for abdullah sultan tutoring" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
           </div>
@@ -871,7 +623,7 @@
           </div>
         </article>
 
-        <aside class="quote-panel reveal" aria-label="featured teacher recommendation">
+        <aside class="quote-panel" aria-label="featured teacher recommendation">
           <div class="eyebrow">featured recommendation</div>
           <blockquote>"abdullah does a great job in class trying to make sure he fully understands the content ... students notice this and gravitate towards him to look for help, and he's always willing to lend a helping hand."</blockquote>
           <cite>mr. senneff, science 10</cite>
@@ -879,19 +631,19 @@
       </div>
 
       <div class="video-grid">
-        <article class="video-card reveal">
+        <article class="video-card">
           <div class="video-shell"><iframe src="https://www.youtube.com/embed/ypFCKkdCxBc" title="erin kim recommendation for abdullah sultan tutoring" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
           <div class="video-meta"><div><strong>erin kim</strong><span>senior | upenn '30</span></div><span class="badge">student</span></div>
         </article>
-        <article class="video-card reveal">
+        <article class="video-card">
           <div class="video-shell"><iframe src="https://www.youtube.com/embed/RDLiD8m-XHA" title="edoardo pelati recommendation for abdullah sultan tutoring" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
           <div class="video-meta"><div><strong>edoardo pelati</strong><span>science 10 classmate</span></div><span class="badge">student</span></div>
         </article>
-        <article class="video-card reveal">
+        <article class="video-card">
           <div class="video-shell"><iframe src="https://www.youtube.com/embed/fWpOw5f2-wo" title="abdullah al-ashmouny recommendation for abdullah sultan tutoring" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
           <div class="video-meta"><div><strong>abdullah al-ashmouny</strong><span>math i student</span></div><span class="badge">student</span></div>
         </article>
-        <article class="video-card reveal">
+        <article class="video-card">
           <div class="video-shell"><iframe src="https://www.youtube.com/embed/UE-fREI-XT8" title="elijah blackburn recommendation for abdullah sultan tutoring" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
           <div class="video-meta"><div><strong>elijah blackburn</strong><span>math iii student</span></div><span class="badge">student</span></div>
         </article>
@@ -899,16 +651,16 @@
     </section>
 
     <section class="section" id="about">
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <div>
-          <div class="eyebrow"><span class="status-dot"></span>peer tutor, not a lecture robot</div>
+          <div class="eyebrow">peer tutor, not a lecture robot</div>
           <h2>clear, calm, and actually useful.</h2>
         </div>
         <p>the goal is not to survive one worksheet. it is to understand the idea well enough to use it again under pressure.</p>
       </div>
 
       <div class="about-grid">
-        <aside class="info-card accent reveal" aria-label="abdullah at a glance">
+        <aside class="info-card accent" aria-label="abdullah at a glance">
           <h3>at a glance</h3>
           <p>ais-r sophomore, highest math level in grade 10, represented the school at a vienna math competition, and currently tutoring math plus science 10.</p>
           <div class="mini-grid">
@@ -920,22 +672,22 @@
         </aside>
 
         <div class="quality-grid">
-          <article class="quality reveal">
+          <article class="quality">
             <div class="icon">?</div>
             <h3>the why before the how</h3>
             <p>if you can re-derive it, you own it. sessions build intuition first, formulas second.</p>
           </article>
-          <article class="quality reveal">
+          <article class="quality">
             <div class="icon">i</div>
             <h3>syllabus-aware help</h3>
             <p>math i through math iii and science 10, taught by someone who has taken the classes recently.</p>
           </article>
-          <article class="quality reveal">
+          <article class="quality">
             <div class="icon">*</div>
             <h3>casual and focused</h3>
             <p>we use your actual work, shared notes, and the questions you are nervous to ask in class.</p>
           </article>
-          <article class="quality reveal">
+          <article class="quality">
             <div class="icon">+</div>
             <h3>test-ready practice</h3>
             <p>explanations turn into reps, reps turn into confidence, and confidence shows up on quizzes.</p>
@@ -945,43 +697,43 @@
     </section>
 
     <section class="section" id="subjects">
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <div>
-          <div class="eyebrow"><span class="status-dot"></span>subjects and pricing</div>
+          <div class="eyebrow">subjects and pricing</div>
           <h2>simple pricing. real help.</h2>
         </div>
         <p>individual session rates depend on the subject. group sessions are available for up to three students.</p>
       </div>
 
       <div class="pricing-grid">
-        <article class="price-card reveal">
+        <article class="price-card">
           <h3>math i</h3>
           <p>solving systems, linear functions, and intro algebra.</p>
           <div class="price">40 <span>sar/hr</span></div>
         </article>
-        <article class="price-card reveal">
+        <article class="price-card">
           <h3>math ii</h3>
           <p>quadratics, sequences, and trig foundations.</p>
           <div class="price">40 <span>sar/hr</span></div>
         </article>
-        <article class="price-card reveal">
+        <article class="price-card">
           <h3>math ii/iii</h3>
           <p>functions, polynomials, and advanced trig.</p>
           <div class="price">55 <span>sar/hr</span></div>
         </article>
-        <article class="price-card reveal">
+        <article class="price-card">
           <h3>math iii</h3>
           <p>precalculus, logs, exponentials, and series.</p>
           <div class="price">55 <span>sar/hr</span></div>
         </article>
-        <article class="price-card reveal">
+        <article class="price-card">
           <h3>science 10</h3>
           <p>biology topics including cells, genetics, ecology, and body systems.</p>
           <div class="price">60 <span>sar/hr</span></div>
         </article>
       </div>
 
-      <div class="group-box reveal">
+      <div class="group-box">
         <div>
           <h3>bring friends for a focused group session.</h3>
           <p class="group-copy">group price is the number of people in the lesson multiplied by the one-hour rate for that subject, plus 5 riyals for each additional person after the first.</p>
@@ -995,12 +747,12 @@
     </section>
 
     <section class="section contact" id="contact">
-      <div class="contact-panel primary reveal">
+      <div class="contact-panel primary">
         <div class="eyebrow">get in touch</div>
         <h2 class="contact-title">dm me. i reply fast.</h2>
         <p>tell me the subject, what you are stuck on, when you want to meet, and whether it is just you or a group.</p>
       </div>
-      <div class="contact-panel reveal">
+      <div class="contact-panel">
         <h3>best ways to reach me</h3>
         <p>instagram or snapchat is easiest. i usually reply the same day after school, and weekends are quicker.</p>
         <div class="contact-list">
@@ -1013,57 +765,5 @@
   </main>
 
   <footer>copyright abdullah sultan | ais-r math and science tutoring</footer>
-
-  <script>
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (!reducedMotion) {
-      window.addEventListener("pointermove", (event) => {
-        document.body.style.setProperty("--pointer-x", `${event.clientX}px`);
-        document.body.style.setProperty("--pointer-y", `${event.clientY}px`);
-      }, { passive: true });
-    }
-
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll(".reveal").forEach((element, index) => {
-      element.style.transitionDelay = `${Math.min(index % 6, 4) * 70}ms`;
-      revealObserver.observe(element);
-    });
-
-    const sections = [...document.querySelectorAll("main section[id]")];
-    const navLinks = [...document.querySelectorAll(".nav-link")];
-    const navObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach((link) => {
-          link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
-        });
-      });
-    }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
-
-    sections.forEach((section) => navObserver.observe(section));
-
-    document.querySelectorAll("[data-tilt]").forEach((card) => {
-      card.addEventListener("pointermove", (event) => {
-        if (reducedMotion) return;
-        const rect = card.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `rotateX(${y * -5}deg) rotateY(${x * 7}deg)`;
-      });
-
-      card.addEventListener("pointerleave", () => {
-        card.style.transform = "";
-      });
-    });
-  </script>
 </body>
 </html>
