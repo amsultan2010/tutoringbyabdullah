@@ -28,6 +28,14 @@
     <span class="glyph">∞</span>
   </div>
 
+  <nav class="spy" id="spy" aria-label="Section progress">
+    <a href="#top" data-spy="top" aria-label="Top"></a>
+    <a href="#proof" data-spy="proof" aria-label="Proof"></a>
+    <a href="#method" data-spy="method" aria-label="Method"></a>
+    <a href="#rates" data-spy="rates" aria-label="Rates"></a>
+    <a href="#contact" data-spy="contact" aria-label="Contact"></a>
+  </nav>
+
   <header class="nav" id="nav">
     <a class="nav-brand" href="#top">abdullah <em>sultan</em></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"><i></i></button>
@@ -43,7 +51,7 @@
     <!-- HERO: brand + one thesis + one lede + CTAs + meta (Peak-End start) -->
     <section class="hero">
       <div class="hero-frame">
-        <div>
+        <div class="hero-main">
           <p class="hero-brand" data-enter>abdullah sultan · ais-r</p>
           <p class="kicker" data-enter>now booking <span class="dot" aria-hidden="true"></span> grades 9–10</p>
           <h1>
@@ -60,20 +68,6 @@
             </a>
             <a class="btn btn-line magnetic" href="#proof">see recommendations</a>
           </div>
-          <div class="hero-meta" data-enter>
-            <div>
-              <strong><span class="count" data-to="40">0</span><em>sar</em></strong>
-              <span>starting / hr</span>
-            </div>
-            <div>
-              <strong><span class="count" data-to="5">0</span></strong>
-              <span>courses covered</span>
-            </div>
-            <div>
-              <strong><span class="count" data-to="98">0</span><em>%</em></strong>
-              <span>math placement</span>
-            </div>
-          </div>
         </div>
 
         <aside class="hero-side" data-enter aria-label="how sessions work">
@@ -87,6 +81,21 @@
             <li><span>group sessions</span><b>up to 3</b></li>
           </ul>
         </aside>
+
+        <div class="hero-meta" data-enter>
+          <div>
+            <strong><span class="count" data-to="40">0</span><em>sar</em></strong>
+            <span>starting / hr</span>
+          </div>
+          <div>
+            <strong><span class="count" data-to="5">0</span></strong>
+            <span>courses covered</span>
+          </div>
+          <div>
+            <strong><span class="count" data-to="98">0</span><em>%</em></strong>
+            <span>math placement</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -104,8 +113,9 @@
       <div class="shell">
         <div class="block-head" data-enter>
           <div>
+            <p class="sec-mark">01 — proof</p>
             <p class="kicker">5 video recommendations</p>
-            <h2>people who know the work.</h2>
+            <h2 class="anim-head">people who know the work.</h2>
           </div>
           <p>four student clips and one teacher recommendation — play them right here.</p>
         </div>
@@ -117,6 +127,7 @@
           <cite>mr. senneff · science 10 · ais-r</cite>
         </div>
 
+        <div class="film-pin" id="filmPin">
         <div class="film-rail" id="filmRail">
           <article class="film is-feature" data-film>
             <div class="film-frame">
@@ -149,6 +160,7 @@
             <div class="film-cap"><strong>elijah blackburn</strong><span>math iii student</span></div>
           </article>
         </div>
+        </div>
       </div>
     </section>
 
@@ -156,8 +168,9 @@
     <section class="block" id="method">
       <div class="shell about-pin">
         <div class="about-sticky" data-enter>
+          <p class="sec-mark">02 — method</p>
           <p class="kicker">peer tutor, not a lecture robot</p>
-          <h2>clear, calm, and actually useful.</h2>
+          <h2 class="anim-head">clear, calm, and actually useful.</h2>
           <p>the goal isn’t surviving one worksheet — it’s understanding the idea well enough to use it again under pressure. hi, i’m abdullah: ais-r sophomore, top-4 math level, 98% placement scorer, vienna competition, currently tutoring math + science 10.</p>
           <div class="glance">
             <div><strong>ais-r</strong><span>school</span></div>
@@ -168,28 +181,28 @@
         </div>
 
         <div class="credo">
-          <article data-enter>
+          <article>
             <span class="idx">01</span>
             <div>
               <h3>the why before the how</h3>
               <p>if you can re-derive it, you own it. sessions build intuition first, formulas second.</p>
             </div>
           </article>
-          <article data-enter>
+          <article>
             <span class="idx">02</span>
             <div>
               <h3>syllabus-aware help</h3>
               <p>math i through math iii and science 10, taught by someone who took the same classes recently.</p>
             </div>
           </article>
-          <article data-enter>
+          <article>
             <span class="idx">03</span>
             <div>
               <h3>casual and focused</h3>
               <p>we use your actual work, shared notes, and the questions you’re nervous to ask in class.</p>
             </div>
           </article>
-          <article data-enter>
+          <article>
             <span class="idx">04</span>
             <div>
               <h3>test-ready practice</h3>
@@ -203,9 +216,11 @@
     <!-- RATES — horizontal scrub -->
     <section class="rates block" id="rates">
       <div class="rates-intro" data-enter>
+        <p class="sec-mark">03 — rates</p>
         <p class="kicker">subjects and pricing</p>
-        <h2>simple pricing. real help.</h2>
-        <p>individual rates depend on the subject. group sessions available for up to three students. scroll sideways through the board.</p>
+        <h2 class="anim-head">simple pricing. real help.</h2>
+        <p>individual rates depend on the subject. group sessions available for up to three students.</p>
+        <p class="rates-hint">scroll to browse <span class="scroll-arr" aria-hidden="true">→</span></p>
       </div>
 
       <div class="rates-pin" id="ratesPin">
@@ -259,8 +274,9 @@
       <div class="contact-board">
         <div class="contact-blast">
           <div>
+            <p class="sec-mark">04 — contact</p>
             <p class="kicker">get in touch</p>
-            <h2>dm me. i reply fast.</h2>
+            <h2 class="anim-head">dm me. i reply fast.</h2>
             <p>tell me the subject, what you’re stuck on, when you want to meet, and whether it’s just you or a group. i usually reply the same day after school.</p>
           </div>
           <a class="btn btn-line magnetic" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">
