@@ -30,9 +30,9 @@
 
   <nav class="spy" id="spy" aria-label="Section progress">
     <a href="#top" data-spy="top" aria-label="Top"></a>
-    <a href="#proof" data-spy="proof" aria-label="Proof"></a>
-    <a href="#method" data-spy="method" aria-label="Method"></a>
-    <a href="#rates" data-spy="rates" aria-label="Rates"></a>
+    <a href="#proof" data-spy="proof" aria-label="Recommendations"></a>
+    <a href="#method" data-spy="method" aria-label="About"></a>
+    <a href="#rates" data-spy="rates" aria-label="Subjects"></a>
     <a href="#contact" data-spy="contact" aria-label="Contact"></a>
   </nav>
 
@@ -40,9 +40,9 @@
     <a class="nav-brand" href="#top">abdullah <em>sultan</em></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"><i></i></button>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#proof">proof</a>
-      <a href="#method">method</a>
-      <a href="#rates">rates</a>
+      <a href="#proof">recommendations</a>
+      <a href="#method">about</a>
+      <a href="#rates">subjects</a>
       <a class="nav-cta" href="#contact">book a session</a>
     </nav>
   </header>
@@ -108,58 +108,64 @@
       </div>
     </div>
 
-    <!-- PROOF / testimonials -->
+    <!-- RECOMMENDATIONS — featured teacher + quote, then student grid -->
     <section class="block" id="proof">
       <div class="shell">
         <div class="block-head" data-enter>
           <div>
-            <p class="sec-mark">01 — proof</p>
-            <p class="kicker">5 video recommendations</p>
+            <p class="sec-mark">01 — recommendations</p>
+            <p class="kicker">teacher + student clips</p>
             <h2 class="anim-head">people who know the work.</h2>
           </div>
-          <p>four student clips and one teacher recommendation — play them right here.</p>
+          <p>watch a teacher recommendation and four student clips from classmates i’ve helped.</p>
         </div>
 
-        <div class="quote-stage" data-enter>
-          <blockquote>
-            “abdullah does a great job in class trying to make sure he fully understands the content … students notice this and gravitate towards him to look for help, and he’s always willing to lend a helping hand.”
-          </blockquote>
-          <cite>mr. senneff · science 10 · ais-r</cite>
-        </div>
-
-        <div class="film-pin" id="filmPin">
-        <div class="film-rail" id="filmRail">
-          <article class="film is-feature" data-film>
+        <div class="feature-row">
+          <article class="film film-feature" data-film>
             <div class="film-frame">
               <iframe src="https://www.youtube.com/embed/8cN78bOqM8E" title="mr. senneff recommendation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-            <div class="film-cap"><strong>mr. senneff</strong><span>science 10 teacher · ais-r</span></div>
+            <div class="film-cap">
+              <strong>mr. senneff</strong>
+              <span>science 10 teacher · ais-r</span>
+              <span class="badge">teacher</span>
+            </div>
           </article>
+
+          <aside class="quote-panel" aria-label="featured teacher recommendation">
+            <p class="kicker">featured recommendation</p>
+            <blockquote>
+              “abdullah does a great job in class trying to make sure he fully understands the content … students notice this and gravitate towards him to look for help, and he’s always willing to lend a helping hand.”
+            </blockquote>
+            <cite>mr. senneff · science 10 · ais-r</cite>
+          </aside>
+        </div>
+
+        <div class="film-grid" id="filmRail">
           <article class="film" data-film>
             <div class="film-frame">
               <iframe src="https://www.youtube.com/embed/ypFCKkdCxBc" title="erin kim recommendation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-            <div class="film-cap"><strong>erin kim</strong><span>senior · upenn ’30</span></div>
+            <div class="film-cap"><strong>erin kim</strong><span>senior · upenn ’30</span><span class="badge">student</span></div>
           </article>
           <article class="film" data-film>
             <div class="film-frame">
-              <iframe src="https://www.youtube.com/embed/RDLiD8m-XHA" title="edoardo pelati recommendation" loading="lazy" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/RDLiD8m-XHA" title="edoardo pelati recommendation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-            <div class="film-cap"><strong>edoardo pelati</strong><span>science 10 classmate</span></div>
+            <div class="film-cap"><strong>edoardo pelati</strong><span>science 10 classmate</span><span class="badge">student</span></div>
           </article>
           <article class="film" data-film>
             <div class="film-frame">
-              <iframe src="https://www.youtube.com/embed/fWpOw5f2-wo" title="abdullah al-ashmouny recommendation" loading="lazy" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/fWpOw5f2-wo" title="abdullah al-ashmouny recommendation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-            <div class="film-cap"><strong>abdullah al-ashmouny</strong><span>math i student</span></div>
+            <div class="film-cap"><strong>abdullah al-ashmouny</strong><span>math i student</span><span class="badge">student</span></div>
           </article>
           <article class="film" data-film>
             <div class="film-frame">
-              <iframe src="https://www.youtube.com/embed/UE-fREI-XT8" title="elijah blackburn recommendation" loading="lazy" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/UE-fREI-XT8" title="elijah blackburn recommendation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-            <div class="film-cap"><strong>elijah blackburn</strong><span>math iii student</span></div>
+            <div class="film-cap"><strong>elijah blackburn</strong><span>math iii student</span><span class="badge">student</span></div>
           </article>
-        </div>
         </div>
       </div>
     </section>
@@ -168,7 +174,7 @@
     <section class="block" id="method">
       <div class="shell about-pin">
         <div class="about-sticky" data-enter>
-          <p class="sec-mark">02 — method</p>
+          <p class="sec-mark">02 — credentials &amp; approach</p>
           <p class="kicker">peer tutor, not a lecture robot</p>
           <h2 class="anim-head">clear, calm, and actually useful.</h2>
           <p>the goal isn’t surviving one worksheet — it’s understanding the idea well enough to use it again under pressure. hi, i’m abdullah: ais-r sophomore, top-4 math level, 98% placement scorer, vienna competition, currently tutoring math + science 10.</p>
@@ -216,8 +222,8 @@
     <!-- RATES — horizontal scrub -->
     <section class="rates block" id="rates">
       <div class="rates-intro" data-enter>
-        <p class="sec-mark">03 — rates</p>
-        <p class="kicker">subjects and pricing</p>
+        <p class="sec-mark">03 — subjects &amp; pricing</p>
+        <p class="kicker">what i teach</p>
         <h2 class="anim-head">simple pricing. real help.</h2>
         <p>individual rates depend on the subject. group sessions available for up to three students.</p>
         <p class="rates-hint">scroll to browse <span class="scroll-arr" aria-hidden="true">→</span></p>

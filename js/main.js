@@ -8,7 +8,6 @@
   const progress = document.getElementById("progress");
   const track = document.getElementById("ratesTrack");
   const marquee = document.getElementById("marquee");
-  const filmRail = document.getElementById("filmRail");
 
   if (toggle && nav) {
     toggle.addEventListener("click", () => {
@@ -242,36 +241,34 @@
           );
         });
 
-        /* Quote scrub + scale */
+        /* Featured quote scrub */
         gsap.fromTo(
-          ".quote-stage blockquote",
-          { autoAlpha: 0.2, y: 50, scale: 0.97 },
+          ".quote-panel blockquote",
+          { autoAlpha: 0.25, y: 36 },
           {
             autoAlpha: 1,
             y: 0,
-            scale: 1,
             ease: "none",
             scrollTrigger: {
-              trigger: ".quote-stage",
-              start: "top 90%",
-              end: "top 35%",
+              trigger: ".quote-panel",
+              start: "top 88%",
+              end: "top 45%",
               scrub: true,
             },
           }
         );
 
         gsap.fromTo(
-          ".quote-stage cite",
-          { autoAlpha: 0, x: -20 },
+          ".feature-row",
+          { autoAlpha: 0, y: 40 },
           {
             autoAlpha: 1,
-            x: 0,
-            ease: "none",
+            y: 0,
+            duration: 0.85,
             scrollTrigger: {
-              trigger: ".quote-stage",
-              start: "top 70%",
-              end: "top 40%",
-              scrub: true,
+              trigger: ".feature-row",
+              start: "top 88%",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -297,10 +294,10 @@
         gsap.set("[data-enter], [data-film], .anim-head, .kicker", { clearProps: "all" });
       }
 
-      /* Film rail — compact grid (no full-screen pin) */
-      if (filmRail && live) {
+      /* Film reveals */
+      if (live) {
         const films = gsap.utils.toArray("[data-film]");
-        gsap.set(films, { autoAlpha: 0, y: 28 });
+        gsap.set(films, { autoAlpha: 0, y: 32 });
 
         ScrollTrigger.batch(films, {
           start: "top 92%",
@@ -309,30 +306,11 @@
             gsap.to(batch, {
               autoAlpha: 1,
               y: 0,
-              stagger: 0.07,
-              duration: 0.65,
+              stagger: 0.08,
+              duration: 0.7,
               overwrite: true,
             }),
         });
-
-        if (isDesktop) {
-          films.forEach((film) => {
-            gsap.fromTo(
-              film.querySelector(".film-frame"),
-              { y: 24 },
-              {
-                y: 0,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: film,
-                  start: "top 95%",
-                  end: "top 55%",
-                  scrub: true,
-                },
-              }
-            );
-          });
-        }
       }
 
       /* Credo highlight as you scroll — Miller + Zeigarnik */
