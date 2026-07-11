@@ -504,7 +504,7 @@
           });
         });
 
-        document.querySelectorAll(".rate, .film, .credo article").forEach((card) => {
+        document.querySelectorAll(".rate, .credo article").forEach((card) => {
           card.addEventListener("pointermove", (e) => {
             const r = card.getBoundingClientRect();
             const x = (e.clientX - r.left) / r.width - 0.5;
