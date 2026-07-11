@@ -1,3 +1,5 @@
-made a site to advertise my tutoring for math/science
+# tutoring by abdullah
 
-stack: html / css / vanilla js + gsap + scrolltrigger
+Static site — **HTML / CSS / vanilla JS + GSAP + ScrollTrigger**.
+
+Editorial minimalism with scroll- and hover-driven motion.

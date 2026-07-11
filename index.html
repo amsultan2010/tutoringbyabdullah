@@ -12,295 +12,276 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23e8541a'/%3E%3Ctext x='16' y='22' font-family='Georgia%2C serif' font-size='18' font-weight='700' fill='white' text-anchor='middle'%3Ea%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="wash" aria-hidden="true"></div>
+  <div class="atmosphere" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
-  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
-  <div aria-hidden="true" id="floaters">
-    <span class="floater">∑</span>
-    <span class="floater">π</span>
-    <span class="floater">√</span>
-    <span class="floater">∫</span>
-    <span class="floater">Δ</span>
-    <span class="floater">∞</span>
-    <span class="floater">θ</span>
-    <span class="floater">∂</span>
+  <div class="glyph-field" aria-hidden="true">
+    <span class="glyph">∑</span>
+    <span class="glyph">π</span>
+    <span class="glyph">∫</span>
+    <span class="glyph">√</span>
+    <span class="glyph">∞</span>
   </div>
 
-  <header class="nav" id="mainNav">
-    <div class="nav-inner">
-      <a class="brand" href="#top" aria-label="abdullah sultan tutoring home">
-        <span class="brand-mark" aria-hidden="true">a</span>
-        <span>abdullah sultan</span>
-      </a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">
-        <span></span>
-      </button>
-      <nav class="nav-links" aria-label="Primary">
-        <a class="nav-link" href="#testimonials">testimonials</a>
-        <a class="nav-link" href="#about">about</a>
-        <a class="nav-link" href="#subjects">subjects</a>
-      </nav>
-      <a class="nav-cta" href="#contact">
-        contact
-        <svg class="cta-arrow" width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
+  <header class="nav" id="nav">
+    <a class="nav-brand" href="#top">abdullah <em>sultan</em></a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"><i></i></button>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#proof">proof</a>
+      <a href="#method">method</a>
+      <a href="#rates">rates</a>
+      <a class="nav-cta" href="#contact">book a session</a>
+    </nav>
   </header>
 
   <main id="top">
-    <section>
-      <div class="container">
-        <div class="hero-grid">
-          <div class="hero-copy-col">
-            <div class="eyebrow live reveal">now booking · ais-r grades 9–10</div>
-            <h1>
-              <span class="line"><span class="line-inner">math &amp; science</span></span>
-              <span class="line"><span class="line-inner">that finally</span></span>
-              <span class="line"><span class="line-inner"><span class="accent-word" id="accentWord">clicks.</span></span></span>
-            </h1>
-            <p class="hero-copy reveal">hi, i'm abdullah. i'm a sophomore at ais-r, one of four students in the highest math level in grade 10, a 98% math placement scorer, and the person classmates turn to when a topic stops making sense.</p>
-            <div class="hero-actions reveal">
-              <a class="btn btn-primary magnetic" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-                message on instagram
-              </a>
-              <a class="btn btn-secondary magnetic" href="#testimonials">watch recommendations</a>
+    <!-- HERO: brand + one thesis + one lede + CTAs + meta (Peak-End start) -->
+    <section class="hero">
+      <div class="hero-frame">
+        <div>
+          <p class="hero-brand" data-enter>abdullah sultan · ais-r</p>
+          <p class="kicker" data-enter>now booking <span class="dot" aria-hidden="true"></span> grades 9–10</p>
+          <h1>
+            <span class="line"><span>math &amp; science</span></span>
+            <span class="line"><span>that finally</span></span>
+            <span class="line"><span class="italic-accent">clicks.</span></span>
+          </h1>
+          <p class="hero-lede" data-enter>
+            peer tutoring from an ais-r sophomore in the highest math level — clear explanations, calm pace, and help built around the work you’re actually stuck on.
+          </p>
+          <div class="hero-cta" data-enter>
+            <a class="btn btn-fill magnetic" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">
+              message on instagram <span class="arr" aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn-line magnetic" href="#proof">see recommendations</a>
+          </div>
+          <div class="hero-meta" data-enter>
+            <div>
+              <strong><span class="count" data-to="40">0</span><em>sar</em></strong>
+              <span>starting / hr</span>
             </div>
-            <div class="stats-bar reveal">
-              <div class="stat">
-                <div class="stat-number"><span class="count" data-target="40">0</span><span class="unit"> sar</span></div>
-                <div class="stat-label">starting rate / hr</div>
-              </div>
-              <div class="stat">
-                <div class="stat-number"><span class="count" data-target="5">0</span><span class="unit"> courses</span></div>
-                <div class="stat-label">math &amp; science</div>
-              </div>
-              <div class="stat">
-                <div class="stat-number"><span class="count" data-target="98">0</span><span class="unit">%</span></div>
-                <div class="stat-label">math placement score</div>
-              </div>
+            <div>
+              <strong><span class="count" data-to="5">0</span></strong>
+              <span>courses covered</span>
+            </div>
+            <div>
+              <strong><span class="count" data-to="98">0</span><em>%</em></strong>
+              <span>math placement</span>
             </div>
           </div>
+        </div>
 
-          <aside class="lesson-card reveal" id="lessonCard" aria-label="how sessions work">
-            <div class="lesson-card-label">session notes</div>
-            <h3>how sessions work</h3>
-            <p>we work from your actual class material, slow down the parts that feel confusing, and then practice until the method feels natural.</p>
-            <ul class="lesson-list">
-              <li class="lesson-item"><span>homework help</span><strong>focused</strong></li>
-              <li class="lesson-item"><span>quiz review</span><strong>clear</strong></li>
-              <li class="lesson-item"><span>test prep</span><strong>calm</strong></li>
-              <li class="lesson-item"><span>group sessions</span><strong>up to 3</strong></li>
-            </ul>
-          </aside>
+        <aside class="hero-side" data-enter aria-label="how sessions work">
+          <p class="kicker">session notes</p>
+          <h2>how sessions work</h2>
+          <p>we work from your actual class material, slow down the confusing parts, then practice until the method feels natural.</p>
+          <ul class="session-rows">
+            <li><span>homework help</span><b>focused</b></li>
+            <li><span>quiz review</span><b>clear</b></li>
+            <li><span>test prep</span><b>calm</b></li>
+            <li><span>group sessions</span><b>up to 3</b></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Subject marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee">
+        <span>math i <i>/</i> math ii <i>/</i> math ii/iii <i>/</i> math iii <i>/</i> science 10 <i>/</i></span>
+        <span>math i <i>/</i> math ii <i>/</i> math ii/iii <i>/</i> math iii <i>/</i> science 10 <i>/</i></span>
+        <span>math i <i>/</i> math ii <i>/</i> math ii/iii <i>/</i> math iii <i>/</i> science 10 <i>/</i></span>
+      </div>
+    </div>
+
+    <!-- PROOF / testimonials -->
+    <section class="block" id="proof">
+      <div class="shell">
+        <div class="block-head" data-enter>
+          <div>
+            <p class="kicker">5 video recommendations</p>
+            <h2>people who know the work.</h2>
+          </div>
+          <p>four student clips and one teacher recommendation — play them right here.</p>
+        </div>
+
+        <div class="quote-stage" data-enter>
+          <blockquote>
+            “abdullah does a great job in class trying to make sure he fully understands the content … students notice this and gravitate towards him to look for help, and he’s always willing to lend a helping hand.”
+          </blockquote>
+          <cite>mr. senneff · science 10 · ais-r</cite>
+        </div>
+
+        <div class="film-rail" id="filmRail">
+          <article class="film is-feature" data-film>
+            <div class="film-frame">
+              <iframe src="https://www.youtube.com/embed/8cN78bOqM8E" title="mr. senneff recommendation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="film-cap"><strong>mr. senneff</strong><span>science 10 teacher · ais-r</span></div>
+          </article>
+          <article class="film" data-film>
+            <div class="film-frame">
+              <iframe src="https://www.youtube.com/embed/ypFCKkdCxBc" title="erin kim recommendation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="film-cap"><strong>erin kim</strong><span>senior · upenn ’30</span></div>
+          </article>
+          <article class="film" data-film>
+            <div class="film-frame">
+              <iframe src="https://www.youtube.com/embed/RDLiD8m-XHA" title="edoardo pelati recommendation" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <div class="film-cap"><strong>edoardo pelati</strong><span>science 10 classmate</span></div>
+          </article>
+          <article class="film" data-film>
+            <div class="film-frame">
+              <iframe src="https://www.youtube.com/embed/fWpOw5f2-wo" title="abdullah al-ashmouny recommendation" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <div class="film-cap"><strong>abdullah al-ashmouny</strong><span>math i student</span></div>
+          </article>
+          <article class="film" data-film>
+            <div class="film-frame">
+              <iframe src="https://www.youtube.com/embed/UE-fREI-XT8" title="elijah blackburn recommendation" loading="lazy" allowfullscreen></iframe>
+            </div>
+            <div class="film-cap"><strong>elijah blackburn</strong><span>math iii student</span></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <hr class="section-rule">
-
-    <section id="testimonials">
-      <div class="container">
-        <div class="section-header reveal">
-          <div>
-            <div class="eyebrow">5 video recommendations</div>
-            <h2 class="split-head">people who know the work.</h2>
+    <!-- METHOD / about -->
+    <section class="block" id="method">
+      <div class="shell about-pin">
+        <div class="about-sticky" data-enter>
+          <p class="kicker">peer tutor, not a lecture robot</p>
+          <h2>clear, calm, and actually useful.</h2>
+          <p>the goal isn’t surviving one worksheet — it’s understanding the idea well enough to use it again under pressure. hi, i’m abdullah: ais-r sophomore, top-4 math level, 98% placement scorer, vienna competition, currently tutoring math + science 10.</p>
+          <div class="glance">
+            <div><strong>ais-r</strong><span>school</span></div>
+            <div><strong>grade 10</strong><span>current year</span></div>
+            <div><strong>top 4</strong><span>math level</span></div>
+            <div><strong>vienna</strong><span>competition</span></div>
           </div>
-          <p>four student clips and one teacher recommendation embedded directly from youtube shorts. play them right here.</p>
         </div>
 
-        <div class="video-feature">
-          <article class="video-card reveal">
-            <div class="video-shell">
-              <iframe src="https://www.youtube.com/embed/8cN78bOqM8E" title="mr. senneff recommendation for abdullah sultan tutoring" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
-            </div>
-            <div class="video-meta">
-              <div><strong>mr. senneff</strong><span>science 10 teacher · ais-r</span></div>
-              <span class="badge">teacher</span>
-            </div>
-          </article>
-
-          <aside class="quote-panel reveal" aria-label="featured teacher recommendation">
-            <div class="eyebrow">featured recommendation</div>
-            <p class="quote-text">"abdullah does a great job in class trying to make sure he fully understands the content … students notice this and gravitate towards him to look for help, and he's always willing to lend a helping hand."</p>
-            <span class="quote-cite">mr. senneff, science 10 · ais-r</span>
-          </aside>
-        </div>
-
-        <div class="video-grid">
-          <article class="video-card">
-            <div class="video-shell"><iframe src="https://www.youtube.com/embed/ypFCKkdCxBc" title="erin kim recommendation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-            <div class="video-meta"><div><strong>erin kim</strong><span>senior · upenn '30</span></div><span class="badge">student</span></div>
-          </article>
-          <article class="video-card">
-            <div class="video-shell"><iframe src="https://www.youtube.com/embed/RDLiD8m-XHA" title="edoardo pelati recommendation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-            <div class="video-meta"><div><strong>edoardo pelati</strong><span>science 10 classmate</span></div><span class="badge">student</span></div>
-          </article>
-          <article class="video-card">
-            <div class="video-shell"><iframe src="https://www.youtube.com/embed/fWpOw5f2-wo" title="abdullah al-ashmouny recommendation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-            <div class="video-meta"><div><strong>abdullah al-ashmouny</strong><span>math i student</span></div><span class="badge">student</span></div>
-          </article>
-          <article class="video-card">
-            <div class="video-shell"><iframe src="https://www.youtube.com/embed/UE-fREI-XT8" title="elijah blackburn recommendation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-            <div class="video-meta"><div><strong>elijah blackburn</strong><span>math iii student</span></div><span class="badge">student</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <hr class="section-rule">
-
-    <section id="about">
-      <div class="container">
-        <div class="section-header reveal">
-          <div>
-            <div class="eyebrow">peer tutor, not a lecture robot</div>
-            <h2 class="split-head">clear, calm, and actually useful.</h2>
-          </div>
-          <p>the goal is not to survive one worksheet. it's to understand the idea well enough to use it again under pressure.</p>
-        </div>
-
-        <div class="about-grid">
-          <aside class="about-card reveal" aria-label="abdullah at a glance">
-            <h3>at a glance</h3>
-            <p>ais-r sophomore, highest math level in grade 10, represented the school at a vienna math competition, and currently tutoring math plus science 10.</p>
-            <div class="mini-grid">
-              <div class="mini-stat"><strong>ais-r</strong><span>school</span></div>
-              <div class="mini-stat"><strong>grade 10</strong><span>current year</span></div>
-              <div class="mini-stat"><strong>top 4</strong><span>math level</span></div>
-              <div class="mini-stat"><strong>vienna</strong><span>competition</span></div>
-            </div>
-          </aside>
-
-          <div class="quality-grid">
-            <article class="quality-card reveal">
-              <div class="quality-icon">?</div>
+        <div class="credo">
+          <article data-enter>
+            <span class="idx">01</span>
+            <div>
               <h3>the why before the how</h3>
               <p>if you can re-derive it, you own it. sessions build intuition first, formulas second.</p>
-            </article>
-            <article class="quality-card reveal">
-              <div class="quality-icon">📚</div>
+            </div>
+          </article>
+          <article data-enter>
+            <span class="idx">02</span>
+            <div>
               <h3>syllabus-aware help</h3>
               <p>math i through math iii and science 10, taught by someone who took the same classes recently.</p>
-            </article>
-            <article class="quality-card reveal">
-              <div class="quality-icon">💬</div>
+            </div>
+          </article>
+          <article data-enter>
+            <span class="idx">03</span>
+            <div>
               <h3>casual and focused</h3>
-              <p>we use your actual work, shared notes, and the questions you're nervous to ask in class.</p>
-            </article>
-            <article class="quality-card reveal">
-              <div class="quality-icon">✓</div>
+              <p>we use your actual work, shared notes, and the questions you’re nervous to ask in class.</p>
+            </div>
+          </article>
+          <article data-enter>
+            <span class="idx">04</span>
+            <div>
               <h3>test-ready practice</h3>
               <p>explanations turn into reps, reps turn into confidence, and confidence shows up on quizzes.</p>
-            </article>
-          </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <hr class="section-rule">
+    <!-- RATES — horizontal scrub -->
+    <section class="rates block" id="rates">
+      <div class="rates-intro" data-enter>
+        <p class="kicker">subjects and pricing</p>
+        <h2>simple pricing. real help.</h2>
+        <p>individual rates depend on the subject. group sessions available for up to three students. scroll sideways through the board.</p>
+      </div>
 
-    <section id="subjects">
-      <div class="container">
-        <div class="section-header reveal">
-          <div>
-            <div class="eyebrow">subjects and pricing</div>
-            <h2 class="split-head">simple pricing. real help.</h2>
-          </div>
-          <p>individual session rates depend on the subject. group sessions are available for up to three students.</p>
-        </div>
-
-        <div class="pricing-grid">
-          <article class="price-card">
+      <div class="rates-pin" id="ratesPin">
+        <div class="rates-track" id="ratesTrack">
+          <article class="rate">
             <h3>math i</h3>
             <p>solving systems, linear functions, and intro algebra.</p>
-            <div class="price-val"><span class="price-amount">40</span><span class="price-unit">sar / hr</span></div>
+            <div class="cost">40<small>sar / hr</small></div>
           </article>
-          <article class="price-card">
+          <article class="rate">
             <h3>math ii</h3>
             <p>quadratics, sequences, and trig foundations.</p>
-            <div class="price-val"><span class="price-amount">40</span><span class="price-unit">sar / hr</span></div>
+            <div class="cost">40<small>sar / hr</small></div>
           </article>
-          <article class="price-card">
+          <article class="rate">
             <h3>math ii/iii</h3>
             <p>functions, polynomials, and advanced trig.</p>
-            <div class="price-val"><span class="price-amount">55</span><span class="price-unit">sar / hr</span></div>
+            <div class="cost">55<small>sar / hr</small></div>
           </article>
-          <article class="price-card">
+          <article class="rate">
             <h3>math iii</h3>
             <p>precalculus, logs, exponentials, and series.</p>
-            <div class="price-val"><span class="price-amount">55</span><span class="price-unit">sar / hr</span></div>
+            <div class="cost">55<small>sar / hr</small></div>
           </article>
-          <article class="price-card">
+          <article class="rate">
             <h3>science 10</h3>
             <p>biology: cells, genetics, ecology, body systems.</p>
-            <div class="price-val"><span class="price-amount">60</span><span class="price-unit">sar / hr</span></div>
+            <div class="cost">60<small>sar / hr</small></div>
           </article>
         </div>
+      </div>
 
-        <div class="group-section reveal">
+      <div class="group-band">
+        <div class="group-inner" data-enter>
           <div>
+            <p class="kicker">group sessions</p>
             <h3>bring friends for a focused group session.</h3>
-            <p>group price = number of people × one-hour rate for that subject, plus 5 riyals for each additional person after the first.</p>
+            <p>group price = people × the subject’s hourly rate, plus 5 riyals for each additional person after the first.</p>
           </div>
-          <div class="group-prices">
-            <div class="group-price-item"><strong>rate</strong><span>1 person</span></div>
-            <div class="group-price-item"><strong>2× rate + 5</strong><span>2 people</span></div>
-            <div class="group-price-item"><strong>3× rate + 10</strong><span>3 people</span></div>
-          </div>
+          <ul class="formula">
+            <li>rate <span>1 person</span></li>
+            <li>2× rate + 5 <span>2 people</span></li>
+            <li>3× rate + 10 <span>3 people</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <hr class="section-rule">
-
-    <section id="contact">
-      <div class="container">
-        <div class="contact-grid">
-          <div class="contact-hero reveal">
-            <div class="eyebrow">get in touch</div>
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="contact-board">
+        <div class="contact-blast">
+          <div>
+            <p class="kicker">get in touch</p>
             <h2>dm me. i reply fast.</h2>
-            <p>tell me the subject, what you're stuck on, when you want to meet, and whether it's just you or a group. i usually reply the same day after school.</p>
+            <p>tell me the subject, what you’re stuck on, when you want to meet, and whether it’s just you or a group. i usually reply the same day after school.</p>
           </div>
-          <div class="contact-panel reveal">
-            <h3>best ways to reach me</h3>
-            <p>instagram or snapchat is easiest. weekends are even quicker.</p>
-            <div class="contact-links">
-              <a class="contact-row linked" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">
-                <div class="contact-row-left">
-                  <div class="contact-icon">📷</div>
-                  <div>
-                    <div class="contact-label">instagram</div>
-                    <div class="contact-handle">@a.m.sultan_</div>
-                  </div>
-                </div>
-                <svg class="contact-arrow" width="18" height="18" fill="none" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9h10M9 4l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-              <div class="contact-row">
-                <div class="contact-row-left">
-                  <div class="contact-icon">👻</div>
-                  <div>
-                    <div class="contact-label">snapchat</div>
-                    <div class="contact-handle">abdullahmsultan</div>
-                  </div>
-                </div>
-                <svg class="contact-arrow" width="18" height="18" fill="none" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9h10M9 4l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="contact-row">
-                <div class="contact-row-left">
-                  <div class="contact-icon">🏫</div>
-                  <div>
-                    <div class="contact-label">ais-r campus</div>
-                    <div class="contact-handle">find me in person</div>
-                  </div>
-                </div>
-                <svg class="contact-arrow" width="18" height="18" fill="none" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9h10M9 4l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
+          <a class="btn btn-line magnetic" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">
+            open instagram <span class="arr" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="contact-ways">
+          <h3>best ways to reach me</h3>
+          <p>instagram or snapchat is easiest. weekends are even quicker.</p>
+          <div class="ways">
+            <a href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">
+              <div><strong>instagram</strong><span>@a.m.sultan_</span></div>
+              <span class="go" aria-hidden="true">→</span>
+            </a>
+            <div class="way">
+              <div><strong>snapchat</strong><span>abdullahmsultan</span></div>
+              <span class="go" aria-hidden="true">·</span>
+            </div>
+            <div class="way">
+              <div><strong>ais-r campus</strong><span>find me in person</span></div>
+              <span class="go" aria-hidden="true">·</span>
             </div>
           </div>
         </div>
@@ -308,8 +289,8 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-inner">
+  <footer class="foot">
+    <div class="foot-inner">
       <span>© 2026 abdullah sultan · ais-r math &amp; science tutoring</span>
       <span>riyadh, saudi arabia</span>
     </div>
