@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
+  <div class="wash" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
   <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
 
   <div aria-hidden="true" id="floaters">
@@ -30,39 +31,45 @@
     <span class="floater">∂</span>
   </div>
 
-  <nav class="nav" id="mainNav" aria-label="main navigation">
+  <header class="nav" id="mainNav">
     <div class="nav-inner">
       <a class="brand" href="#top" aria-label="abdullah sultan tutoring home">
         <span class="brand-mark" aria-hidden="true">a</span>
         <span>abdullah sultan</span>
       </a>
-      <div class="nav-links">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+      </button>
+      <nav class="nav-links" aria-label="Primary">
         <a class="nav-link" href="#testimonials">testimonials</a>
         <a class="nav-link" href="#about">about</a>
         <a class="nav-link" href="#subjects">subjects</a>
-      </div>
+      </nav>
       <a class="nav-cta" href="#contact">
         contact
         <svg class="cta-arrow" width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
-  </nav>
+  </header>
 
   <main id="top">
-
     <section>
       <div class="container">
         <div class="hero-grid">
-          <div>
+          <div class="hero-copy-col">
             <div class="eyebrow live reveal">now booking · ais-r grades 9–10</div>
-            <h1 class="reveal">math &amp; science that finally <span class="accent-word" id="accentWord">clicks.</span></h1>
+            <h1>
+              <span class="line"><span class="line-inner">math &amp; science</span></span>
+              <span class="line"><span class="line-inner">that finally</span></span>
+              <span class="line"><span class="line-inner"><span class="accent-word" id="accentWord">clicks.</span></span></span>
+            </h1>
             <p class="hero-copy reveal">hi, i'm abdullah. i'm a sophomore at ais-r, one of four students in the highest math level in grade 10, a 98% math placement scorer, and the person classmates turn to when a topic stops making sense.</p>
             <div class="hero-actions reveal">
-              <a class="btn btn-primary" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">
+              <a class="btn btn-primary magnetic" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
                 message on instagram
               </a>
-              <a class="btn btn-secondary" href="#testimonials">watch recommendations</a>
+              <a class="btn btn-secondary magnetic" href="#testimonials">watch recommendations</a>
             </div>
             <div class="stats-bar reveal">
               <div class="stat">
@@ -80,29 +87,29 @@
             </div>
           </div>
 
-          <aside class="lesson-card reveal" aria-label="how sessions work">
+          <aside class="lesson-card reveal" id="lessonCard" aria-label="how sessions work">
             <div class="lesson-card-label">session notes</div>
             <h3>how sessions work</h3>
             <p>we work from your actual class material, slow down the parts that feel confusing, and then practice until the method feels natural.</p>
             <ul class="lesson-list">
-              <li><span>homework help</span><strong>focused</strong></li>
-              <li><span>quiz review</span><strong>clear</strong></li>
-              <li><span>test prep</span><strong>calm</strong></li>
-              <li><span>group sessions</span><strong>up to 3</strong></li>
+              <li class="lesson-item"><span>homework help</span><strong>focused</strong></li>
+              <li class="lesson-item"><span>quiz review</span><strong>clear</strong></li>
+              <li class="lesson-item"><span>test prep</span><strong>calm</strong></li>
+              <li class="lesson-item"><span>group sessions</span><strong>up to 3</strong></li>
             </ul>
           </aside>
         </div>
       </div>
     </section>
 
-    <hr class="section-divider">
+    <hr class="section-rule">
 
     <section id="testimonials">
       <div class="container">
         <div class="section-header reveal">
           <div>
             <div class="eyebrow">5 video recommendations</div>
-            <h2>people who know the work.</h2>
+            <h2 class="split-head">people who know the work.</h2>
           </div>
           <p>four student clips and one teacher recommendation embedded directly from youtube shorts. play them right here.</p>
         </div>
@@ -126,19 +133,19 @@
         </div>
 
         <div class="video-grid">
-          <article class="video-card reveal">
+          <article class="video-card">
             <div class="video-shell"><iframe src="https://www.youtube.com/embed/ypFCKkdCxBc" title="erin kim recommendation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
             <div class="video-meta"><div><strong>erin kim</strong><span>senior · upenn '30</span></div><span class="badge">student</span></div>
           </article>
-          <article class="video-card reveal">
+          <article class="video-card">
             <div class="video-shell"><iframe src="https://www.youtube.com/embed/RDLiD8m-XHA" title="edoardo pelati recommendation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
             <div class="video-meta"><div><strong>edoardo pelati</strong><span>science 10 classmate</span></div><span class="badge">student</span></div>
           </article>
-          <article class="video-card reveal">
+          <article class="video-card">
             <div class="video-shell"><iframe src="https://www.youtube.com/embed/fWpOw5f2-wo" title="abdullah al-ashmouny recommendation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
             <div class="video-meta"><div><strong>abdullah al-ashmouny</strong><span>math i student</span></div><span class="badge">student</span></div>
           </article>
-          <article class="video-card reveal">
+          <article class="video-card">
             <div class="video-shell"><iframe src="https://www.youtube.com/embed/UE-fREI-XT8" title="elijah blackburn recommendation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
             <div class="video-meta"><div><strong>elijah blackburn</strong><span>math iii student</span></div><span class="badge">student</span></div>
           </article>
@@ -146,14 +153,14 @@
       </div>
     </section>
 
-    <hr class="section-divider">
+    <hr class="section-rule">
 
     <section id="about">
       <div class="container">
         <div class="section-header reveal">
           <div>
             <div class="eyebrow">peer tutor, not a lecture robot</div>
-            <h2>clear, calm, and actually useful.</h2>
+            <h2 class="split-head">clear, calm, and actually useful.</h2>
           </div>
           <p>the goal is not to survive one worksheet. it's to understand the idea well enough to use it again under pressure.</p>
         </div>
@@ -196,40 +203,40 @@
       </div>
     </section>
 
-    <hr class="section-divider">
+    <hr class="section-rule">
 
     <section id="subjects">
       <div class="container">
         <div class="section-header reveal">
           <div>
             <div class="eyebrow">subjects and pricing</div>
-            <h2>simple pricing. real help.</h2>
+            <h2 class="split-head">simple pricing. real help.</h2>
           </div>
           <p>individual session rates depend on the subject. group sessions are available for up to three students.</p>
         </div>
 
         <div class="pricing-grid">
-          <article class="price-card reveal">
+          <article class="price-card">
             <h3>math i</h3>
             <p>solving systems, linear functions, and intro algebra.</p>
             <div class="price-val"><span class="price-amount">40</span><span class="price-unit">sar / hr</span></div>
           </article>
-          <article class="price-card reveal">
+          <article class="price-card">
             <h3>math ii</h3>
             <p>quadratics, sequences, and trig foundations.</p>
             <div class="price-val"><span class="price-amount">40</span><span class="price-unit">sar / hr</span></div>
           </article>
-          <article class="price-card reveal">
+          <article class="price-card">
             <h3>math ii/iii</h3>
             <p>functions, polynomials, and advanced trig.</p>
             <div class="price-val"><span class="price-amount">55</span><span class="price-unit">sar / hr</span></div>
           </article>
-          <article class="price-card reveal">
+          <article class="price-card">
             <h3>math iii</h3>
             <p>precalculus, logs, exponentials, and series.</p>
             <div class="price-val"><span class="price-amount">55</span><span class="price-unit">sar / hr</span></div>
           </article>
-          <article class="price-card reveal">
+          <article class="price-card">
             <h3>science 10</h3>
             <p>biology: cells, genetics, ecology, body systems.</p>
             <div class="price-val"><span class="price-amount">60</span><span class="price-unit">sar / hr</span></div>
@@ -250,7 +257,7 @@
       </div>
     </section>
 
-    <hr class="section-divider">
+    <hr class="section-rule">
 
     <section id="contact">
       <div class="container">
@@ -299,7 +306,6 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>
