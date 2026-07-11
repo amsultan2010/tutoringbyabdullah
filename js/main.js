@@ -108,7 +108,7 @@
           .to(sessionItems, { autoAlpha: 1, x: 0, duration: 0.5, stagger: 0.07 }, 0.7);
 
         gsap.to(".hero h1", {
-          y: -50,
+          y: -28,
           ease: "none",
           scrollTrigger: {
             trigger: ".hero",
@@ -119,7 +119,7 @@
         });
 
         gsap.to(".hero-side", {
-          y: -30,
+          y: -16,
           ease: "none",
           scrollTrigger: {
             trigger: ".hero",
@@ -297,70 +297,40 @@
         gsap.set("[data-enter], [data-film], .anim-head, .kicker", { clearProps: "all" });
       }
 
-      /* Film rail — pin + horizontal scrub on desktop */
+      /* Film rail — compact grid (no full-screen pin) */
       if (filmRail && live) {
         const films = gsap.utils.toArray("[data-film]");
-        gsap.set(films, { autoAlpha: 0, y: 40 });
+        gsap.set(films, { autoAlpha: 0, y: 28 });
+
+        ScrollTrigger.batch(films, {
+          start: "top 92%",
+          once: true,
+          onEnter: (batch) =>
+            gsap.to(batch, {
+              autoAlpha: 1,
+              y: 0,
+              stagger: 0.07,
+              duration: 0.65,
+              overwrite: true,
+            }),
+        });
 
         if (isDesktop) {
-          const getFilmDist = () => Math.max(0, filmRail.scrollWidth - innerWidth + 80);
-          filmRail.classList.add("is-pinned");
-
-          const filmTween = gsap.to(filmRail, {
-            x: () => -getFilmDist(),
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#filmPin",
-              start: "top 18%",
-              end: () => `+=${getFilmDist() + 240}`,
-              pin: true,
-              scrub: 0.55,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-              onEnter: () => {
-                gsap.to(films, { autoAlpha: 1, y: 0, stagger: 0.06, duration: 0.5, overwrite: true });
-              },
-            },
-          });
-
-          films.forEach((film, i) => {
+          films.forEach((film) => {
             gsap.fromTo(
-              film.querySelector(".film-frame iframe") || film,
-              { scale: 1.12 },
+              film.querySelector(".film-frame"),
+              { y: 24 },
               {
-                scale: 1,
+                y: 0,
                 ease: "none",
                 scrollTrigger: {
                   trigger: film,
-                  containerAnimation: filmTween,
-                  start: "left 90%",
-                  end: "left 40%",
+                  start: "top 95%",
+                  end: "top 55%",
                   scrub: true,
                 },
               }
             );
-            gsap.fromTo(
-              film,
-              { rotate: i % 2 ? 1.5 : -1.5 },
-              {
-                rotate: 0,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: film,
-                  containerAnimation: filmTween,
-                  start: "left 95%",
-                  end: "left 50%",
-                  scrub: true,
-                },
-              }
-            );
-          });
-        } else {
-          ScrollTrigger.batch(films, {
-            start: "top 92%",
-            once: true,
-            onEnter: (batch) =>
-              gsap.to(batch, { autoAlpha: 1, y: 0, stagger: 0.08, duration: 0.7, overwrite: true }),
           });
         }
       }

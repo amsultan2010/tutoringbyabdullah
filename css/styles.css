@@ -36,8 +36,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);
-  line-height: 1.6;
+  font-size: clamp(1.125rem, 0.55vw + 1rem, 1.25rem);
+  line-height: 1.65;
   color: var(--text);
   background: var(--paper);
   overflow-x: hidden;
@@ -134,7 +134,7 @@ ul {
   left: 0;
   right: 0;
   z-index: 50;
-  padding: 1.1rem var(--gutter);
+  padding: 0.85rem var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -170,7 +170,7 @@ ul {
 }
 
 .nav-links a {
-  font-size: 0.88rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--muted);
   position: relative;
@@ -200,12 +200,12 @@ ul {
 .nav-cta {
   display: inline-flex;
   align-items: center;
-  min-height: 2.85rem;
-  padding: 0.55rem 1.35rem;
+  min-height: 3rem;
+  padding: 0.6rem 1.4rem;
   background: var(--orange);
   color: #fff !important;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1rem;
   transition: background 0.25s, transform 0.25s var(--ease);
 }
 
@@ -248,12 +248,12 @@ ul {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  font-size: 0.72rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--orange-dk);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .kicker::before {
@@ -350,7 +350,7 @@ h3 {
 /* ── HERO ── */
 .hero {
   min-height: auto;
-  padding: 5.5rem var(--gutter) 2.5rem;
+  padding: 3.75rem var(--gutter) 1.5rem;
   display: grid;
   align-items: start;
   position: relative;
@@ -390,45 +390,45 @@ h3 {
 
 .hero-brand {
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
   color: var(--ink);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.65rem;
   letter-spacing: -0.02em;
 }
 
 .hero h1 {
-  font-size: clamp(3.2rem, 8.5vw, 7rem);
-  line-height: 0.9;
+  font-size: clamp(3rem, 7.5vw, 6.25rem);
+  line-height: 0.92;
   max-width: 11ch;
 }
 
 .hero-lede {
-  margin-top: 1.15rem;
-  max-width: 34rem;
+  margin-top: 1rem;
+  max-width: 36rem;
   color: var(--muted);
-  font-size: 1.02em;
+  font-size: 1.08em;
 }
 
 .hero-cta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
-  margin-top: 1.35rem;
+  margin-top: 1.15rem;
 }
 
 .hero-meta div {
-  padding: 1rem 1rem 0 0;
+  padding: 1.35rem 1.25rem 0.25rem 0;
 }
 
 .hero-meta div + div {
   border-left: 1px solid var(--line);
-  padding-left: 1.15rem;
+  padding-left: 1.35rem;
 }
 
 .hero-meta strong {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-size: clamp(2.75rem, 5vw, 4rem);
   font-weight: 700;
   color: var(--ink);
   line-height: 1;
@@ -437,25 +437,26 @@ h3 {
 .hero-meta strong em {
   font-style: normal;
   color: var(--orange);
-  font-size: 0.45em;
-  margin-left: 0.15em;
+  font-size: 0.4em;
+  margin-left: 0.2em;
+  vertical-align: 0.15em;
 }
 
 .hero-meta span {
   display: block;
-  margin-top: 0.3rem;
-  font-size: 0.78rem;
+  margin-top: 0.45rem;
+  font-size: 1rem;
   color: var(--muted);
 }
 
 .hero-side h2 {
-  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-size: clamp(1.55rem, 2.4vw, 2.05rem);
   margin-bottom: 0.55rem;
 }
 
 .hero-side p {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   margin-bottom: 1rem;
 }
 
@@ -463,9 +464,9 @@ h3 {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 1rem;
-  padding: 0.7rem 0;
+  padding: 0.75rem 0;
   border-top: 1px solid var(--line);
-  font-size: 0.92rem;
+  font-size: 1.05rem;
 }
 
 .session-rows li:last-child {
@@ -475,7 +476,7 @@ h3 {
 .session-rows b {
   font-weight: 600;
   color: var(--orange-dk);
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -534,9 +535,9 @@ h3 {
 }
 
 .sec-mark {
-  font-size: 0.7rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
   margin-bottom: 0.55rem;
@@ -552,22 +553,22 @@ h3 {
 
 .quote-stage blockquote {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  font-size: clamp(1.45rem, 2.8vw, 2.35rem);
   font-style: italic;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: -0.025em;
   color: var(--ink);
-  max-width: 22ch;
+  max-width: 28ch;
 }
 
 .quote-stage cite {
   display: block;
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   font-style: normal;
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--orange-dk);
 }
@@ -575,16 +576,12 @@ h3 {
 .film-pin {
   position: relative;
 }
-  gap: 0.85rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 0.35rem;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
 
-.film-rail.is-pinned {
-  overflow: visible;
+.film-rail {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.85rem;
+  align-items: start;
 }
 
 .film-rail::-webkit-scrollbar {
@@ -592,18 +589,17 @@ h3 {
 }
 
 .film {
-  flex: 0 0 min(70vw, 220px);
-  scroll-snap-align: start;
+  min-width: 0;
   will-change: transform;
-}
-
-.film.is-feature {
-  flex-basis: min(74vw, 250px);
 }
 
 .film-frame {
   position: relative;
   aspect-ratio: 9 / 16;
+  max-height: 210px;
+  width: auto;
+  max-width: 118px;
+  margin-inline: auto;
   background: #100e0b;
   border: 1px solid var(--ink);
   overflow: hidden;
@@ -615,23 +611,55 @@ h3 {
   width: 100%;
   height: 100%;
   border: 0;
-  transform: scale(1.02);
-  will-change: transform;
 }
 
 .film-cap {
   margin-top: 0.55rem;
+  text-align: center;
 }
 
 .film-cap strong {
   display: block;
-  font-size: 0.92rem;
+  font-size: 1.02rem;
   color: var(--ink);
 }
 
 .film-cap span {
-  font-size: 0.78rem;
+  font-size: 0.92rem;
   color: var(--muted);
+}
+
+@media (max-width: 1100px) {
+  .film-rail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .film-rail {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.35rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .film {
+    flex: 0 0 120px;
+    scroll-snap-align: start;
+  }
+
+  .film-frame {
+    max-width: 120px;
+    max-height: 210px;
+    margin-inline: 0;
+  }
+
+  .film-cap {
+    text-align: left;
+  }
 }
 
 /* About — pinned stack */
@@ -670,12 +698,12 @@ h3 {
 .glance strong {
   display: block;
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.45rem;
   color: var(--ink);
 }
 
 .glance span {
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   color: var(--muted);
 }
 
@@ -703,19 +731,19 @@ h3 {
 
 .credo .idx {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   color: var(--gold);
   padding-top: 0.15rem;
 }
 
 .credo h3 {
-  font-size: clamp(1.25rem, 2vw, 1.55rem);
-  margin-bottom: 0.3rem;
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  margin-bottom: 0.35rem;
 }
 
 .credo p {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 1.05rem;
 }
 
 /* Subjects — horizontal scrub */
@@ -748,9 +776,9 @@ h3 {
   align-items: center;
   gap: 0.45rem;
   margin-top: 0.85rem;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--orange-dk);
 }
@@ -794,7 +822,7 @@ h3 {
 
 .rate p {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 1.02rem;
   flex: 1;
 }
 
@@ -811,7 +839,7 @@ h3 {
 
 .rate .cost small {
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--muted);
   margin-left: 0.25rem;
@@ -858,7 +886,7 @@ h3 {
 
 .formula span {
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   color: var(--muted);
 }
 
@@ -979,11 +1007,11 @@ h3 {
 .ways strong {
   display: block;
   color: var(--ink);
-  font-size: 0.95rem;
+  font-size: 1.08rem;
 }
 
 .ways span {
-  font-size: 0.82rem;
+  font-size: 0.98rem;
   color: var(--muted);
 }
 
@@ -1005,8 +1033,8 @@ h3 {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.75rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted);
 }
