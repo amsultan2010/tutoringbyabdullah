@@ -792,29 +792,31 @@ h3 {
 }
 
 .rates-intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.85rem;
   padding-inline: var(--gutter);
   width: min(var(--max), calc(100% - 2 * var(--gutter)));
   margin-inline: auto;
   margin-bottom: 1.5rem;
 }
 
-.rates-intro > :first-child {
-  max-width: 18ch;
+.rates-intro-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 2rem;
+  margin-top: 0.15rem;
 }
 
 .rates-intro-copy {
-  max-width: 36rem;
+  flex: 0 1 22rem;
+  max-width: 26rem;
 }
 
 .rates-intro h2 {
+  flex: 0 1 auto;
   font-size: clamp(2.4rem, 5.5vw, 4.4rem);
   line-height: 0.95;
-  max-width: 12ch;
-  margin-bottom: 0;
+  max-width: none;
+  margin: 0;
 }
 
 .rates-intro-copy p {
@@ -1185,9 +1187,13 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .rates-intro > :first-child,
+  .rates-intro-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .rates-intro-copy {
-    max-width: none;
+    max-width: 36rem;
   }
 
   .nav-links {
