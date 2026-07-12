@@ -1,4 +1,4 @@
-/* Kinetic editorial — denser ScrollTrigger choreography */
+/* Chapter narrative — GSAP + ScrollTrigger + constellation field */
 
 (() => {
   gsap.registerPlugin(ScrollTrigger);
@@ -6,19 +6,24 @@
   const nav = document.getElementById("nav");
   const toggle = document.getElementById("navToggle");
   const progress = document.getElementById("progress");
-  const track = document.getElementById("ratesTrack");
-  const marquee = document.getElementById("marquee");
+  const methodTrack = document.getElementById("methodTrack");
+  const bandTrack = document.getElementById("bandTrack");
+  const field = document.getElementById("field");
 
+  /* ---------- Nav ---------- */
   if (toggle && nav) {
     toggle.addEventListener("click", () => {
       const open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      document.body.style.overflow = open ? "hidden" : "";
     });
-    nav.querySelectorAll("a").forEach((a) =>
+    nav.querySelectorAll(".nav-links a").forEach((a) =>
       a.addEventListener("click", () => {
         nav.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open menu");
+        document.body.style.overflow = "";
       })
     );
   }
@@ -34,6 +39,178 @@
     });
   });
 
+  /* ---------- Click-to-play YouTube ---------- */
+  document.querySelectorAll(".player[data-yt]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (btn.classList.contains("is-playing")) return;
+      const id = btn.getAttribute("data-yt");
+      const title = btn.getAttribute("data-title") || "video";
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.title = title;
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      btn.querySelector("img")?.remove();
+      btn.appendChild(iframe);
+      btn.classList.add("is-playing");
+    });
+  });
+
+  /* ---------- Quote word split ---------- */
+  document.querySelectorAll("[data-words]").forEach((el) => {
+    const text = el.textContent.trim();
+    el.textContent = "";
+    text.split(/(\s+)/).forEach((chunk) => {
+      if (/^\s+$/.test(chunk)) {
+        el.appendChild(document.createTextNode(chunk));
+        return;
+      }
+      const span = document.createElement("span");
+      span.className = "word";
+      span.textContent = chunk;
+      el.appendChild(span);
+    });
+  });
+
+  /* ---------- Constellation / soft terrain field (auto-drift, no mouse) ---------- */
+  function initField() {
+    if (!field) return () => {};
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const ctx = field.getContext("2d");
+    let w = 0;
+    let h = 0;
+    let dpr = 1;
+    let raf = 0;
+    let stars = [];
+
+    const seed = (i) => {
+      const x = Math.sin(i * 127.1) * 43758.5453;
+      return x - Math.floor(x);
+    };
+
+    const build = () => {
+      const count = w < 700 ? 56 : 88;
+      stars = Array.from({ length: count }, (_, i) => {
+        const r1 = seed(i + 1);
+        const r2 = seed(i + 41);
+        const r3 = seed(i + 97);
+        const r4 = seed(i + 211);
+        return {
+          x: r1,
+          y: r2,
+          z: 0.35 + r3 * 0.65,
+          r: 1 + r3 * 1.8,
+          phase: r1 * Math.PI * 2,
+          speed: 0.55 + r4 * 0.9,
+          orbit: 10 + r3 * 22,
+        };
+      });
+    };
+
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      field.width = Math.floor(w * dpr);
+      field.height = Math.floor(h * dpr);
+      field.style.width = `${w}px`;
+      field.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build();
+    };
+
+    const project = (s, t) => {
+      const driftX = Math.sin(t * 0.28 * s.speed + s.phase) * s.orbit * s.z;
+      const driftY = Math.cos(t * 0.22 * s.speed + s.phase * 1.3) * s.orbit * 0.75 * s.z;
+      const wanderX = Math.sin(t * 0.08 + s.phase * 2.1) * 14;
+      const wanderY = Math.cos(t * 0.06 + s.phase * 1.7) * 12;
+      return {
+        x: s.x * w + driftX + wanderX,
+        y: s.y * h + driftY + wanderY,
+      };
+    };
+
+    const draw = (time) => {
+      const t = time * 0.001;
+      ctx.clearRect(0, 0, w, h);
+
+      /* Soft terrain ridges — continuous wave motion */
+      ctx.lineWidth = 1;
+      const rows = 9;
+      for (let i = 0; i < rows; i++) {
+        const baseY = ((i + 1) / (rows + 1)) * h;
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(33, 92, 78, ${0.09 + i * 0.012})`;
+        for (let x = 0; x <= w; x += 8) {
+          const nx = x / w;
+          const wave =
+            Math.sin(nx * Math.PI * 2.2 + t * 0.45 + i * 0.4) * 22 +
+            Math.sin(nx * Math.PI * 5.1 - t * 0.35 + i) * 10 +
+            Math.cos(t * 0.2 + i * 0.5) * 6;
+          const y = baseY + wave;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      /* Constellation links */
+      const pts = stars.map((s) => ({ ...project(s, t), z: s.z, r: s.r, phase: s.phase }));
+      const linkDist = Math.min(w, h) * 0.2;
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x;
+          const dy = pts[i].y - pts[j].y;
+          const d = Math.hypot(dx, dy);
+          if (d < linkDist) {
+            const a = (1 - d / linkDist) * 0.28 * Math.min(pts[i].z, pts[j].z);
+            ctx.strokeStyle = `rgba(33, 92, 78, ${a})`;
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      /* Stars */
+      pts.forEach((p) => {
+        const pulse = 0.55 + Math.sin(t * 1.8 + p.phase) * 0.3;
+        const alpha = 0.28 + p.z * 0.4 * pulse;
+        ctx.fillStyle = `rgba(33, 92, 78, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * p.z, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (p.phase > 5) {
+          ctx.fillStyle = `rgba(196, 146, 90, ${alpha * 0.55})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, Math.max(0.8, p.r * 0.45), 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+
+      if (!reduce) raf = requestAnimationFrame(draw);
+    };
+
+    resize();
+    if (reduce) {
+      draw(0);
+    } else {
+      raf = requestAnimationFrame(draw);
+    }
+    window.addEventListener("resize", resize);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
+  }
+
+  const killField = initField();
+
   const mm = gsap.matchMedia();
 
   mm.add(
@@ -48,7 +225,6 @@
 
       gsap.defaults({ ease: "power3.out" });
 
-      /* Progress — Zeigarnik */
       if (progress) {
         gsap.to(progress, {
           scaleX: 1,
@@ -57,126 +233,68 @@
             trigger: document.documentElement,
             start: "top top",
             end: "bottom bottom",
-            scrub: live ? 0.25 : true,
+            scrub: live ? 0.3 : true,
           },
         });
       }
 
       ScrollTrigger.create({
-        start: 10,
-        onUpdate: (self) => nav?.classList.toggle("is-solid", self.scroll() > 10),
+        start: 20,
+        onUpdate: (self) => nav?.classList.toggle("is-solid", self.scroll() > 20),
       });
 
-      /* Spy dots */
-      const spyLinks = gsap.utils.toArray("#spy [data-spy]");
-      const spyMap = [
-        { id: "top", el: document.getElementById("top") },
-        { id: "proof", el: document.getElementById("proof") },
-        { id: "method", el: document.getElementById("method") },
-        { id: "rates", el: document.getElementById("rates") },
-        { id: "contact", el: document.getElementById("contact") },
-      ];
-      spyMap.forEach(({ id, el }) => {
-        if (!el) return;
-        ScrollTrigger.create({
-          trigger: el,
-          start: "top center",
-          end: "bottom center",
-          onToggle: (self) => {
-            if (!self.isActive) return;
-            spyLinks.forEach((a) => a.classList.toggle("is-active", a.dataset.spy === id));
-          },
+      if (isFine && live) {
+        document.querySelectorAll("[data-magnetic]").forEach((el) => {
+          const move = (e) => {
+            const r = el.getBoundingClientRect();
+            gsap.to(el, {
+              x: (e.clientX - (r.left + r.width / 2)) * 0.28,
+              y: (e.clientY - (r.top + r.height / 2)) * 0.28,
+              duration: 0.4,
+              ease: "power3.out",
+            });
+          };
+          const leave = () => gsap.to(el, { x: 0, y: 0, duration: 0.65, ease: "elastic.out(1, 0.45)" });
+          el.addEventListener("mousemove", move);
+          el.addEventListener("mouseleave", leave);
+          ctx.add(() => {
+            el.removeEventListener("mousemove", move);
+            el.removeEventListener("mouseleave", leave);
+          });
         });
-      });
-      spyLinks[0]?.classList.add("is-active");
-
-      /* Hero entrance */
-      const lines = gsap.utils.toArray(".hero h1 .line span");
-      const enters = gsap.utils.toArray(".hero [data-enter]");
-      const sessionItems = gsap.utils.toArray(".session-rows li");
+      }
 
       if (live) {
-        gsap.set(lines, { yPercent: 120 });
-        gsap.set(enters, { autoAlpha: 0, y: 24 });
-        gsap.set(sessionItems, { autoAlpha: 0, x: -16 });
+        /* Open — line masks + soft exit scrub */
+        gsap.set(".open-line > span", { yPercent: 120 });
+        gsap.set([".open-meta", ".open-role", ".open-scroll"], { autoAlpha: 0, y: 20 });
 
         gsap
           .timeline()
-          .to(lines, { yPercent: 0, duration: 1, stagger: 0.1 }, 0.1)
-          .to(enters, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.08 }, 0.35)
-          .to(sessionItems, { autoAlpha: 1, x: 0, duration: 0.5, stagger: 0.07 }, 0.7);
+          .to(".open-line > span", { yPercent: 0, duration: 1.3, stagger: 0.14, ease: "power4.out" }, 0.12)
+          .to([".open-meta", ".open-role"], { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.1 }, 0.5)
+          .to(".open-scroll", { autoAlpha: 1, y: 0, duration: 0.65 }, 1);
 
-        gsap.to(".hero h1", {
-          y: -28,
+        gsap.to(".open-stage", {
+          y: 90,
+          scale: 0.94,
+          autoAlpha: 0.2,
+          filter: "blur(2px)",
           ease: "none",
           scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
+            trigger: ".open",
+            start: "center top",
             end: "bottom top",
             scrub: true,
           },
         });
 
-        gsap.to(".hero-side", {
-          y: -16,
+        /* Field parallax on scroll */
+        gsap.to(".field", {
+          y: 80,
           ease: "none",
           scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      } else {
-        gsap.set([...lines, ...enters, ...sessionItems], { clearProps: "all" });
-      }
-
-      /* Glyphs */
-      if (live) {
-        const glyphs = gsap.utils.toArray(".glyph");
-        glyphs.forEach((g, i) => {
-          gsap.to(g, {
-            y: i % 2 ? 36 : -42,
-            rotation: i % 2 ? 7 : -9,
-            duration: 4.5 + i,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-            delay: i * 0.25,
-          });
-        });
-
-        if (isFine) {
-          window.addEventListener(
-            "pointermove",
-            (e) => {
-              const nx = (e.clientX / innerWidth - 0.5) * 2;
-              const ny = (e.clientY / innerHeight - 0.5) * 2;
-              glyphs.forEach((g, i) => {
-                gsap.to(g, {
-                  x: nx * (16 + i * 5),
-                  duration: 1.1,
-                  ease: "power2.out",
-                  overwrite: "auto",
-                });
-              });
-              gsap.to(".grain", {
-                x: nx * 6,
-                y: ny * 5,
-                duration: 1.3,
-                ease: "power2.out",
-                overwrite: "auto",
-              });
-            },
-            { passive: true }
-          );
-        }
-
-        gsap.to(".glyph-field", {
-          y: 160,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "main",
+            trigger: document.body,
             start: "top top",
             end: "bottom bottom",
             scrub: true,
@@ -184,385 +302,426 @@
         });
       }
 
-      /* Marquee + velocity bump on scroll */
-      if (marquee && live) {
-        const tw = marquee.scrollWidth / 3;
-        const mq = gsap.to(marquee, {
-          x: -tw,
-          duration: 22,
+      const revealLines = (selector) => {
+        document.querySelectorAll(selector).forEach((title) => {
+          const lines = title.querySelectorAll(".t-line > span");
+          if (!lines.length || !live) return;
+          gsap.set(lines, { yPercent: 115 });
+          gsap.to(lines, {
+            yPercent: 0,
+            duration: 1.05,
+            stagger: 0.08,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: title,
+              start: "top 84%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
+      };
+
+      revealLines(".thesis-title");
+      revealLines(".section-title");
+      revealLines(".book-title");
+
+      if (live) {
+        gsap.from([".thesis-lede", ".thesis-actions", ".thesis-aside"], {
+          autoAlpha: 0,
+          y: 28,
+          duration: 0.9,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".thesis-inner",
+            start: "top 78%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        /* Thesis title parallax scrub */
+        gsap.to(".thesis-title", {
+          y: -30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".thesis",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        /* Aside cells stagger in */
+        gsap.from(".aside-list li", {
+          autoAlpha: 0,
+          y: 20,
+          duration: 0.7,
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: ".thesis-aside",
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        gsap.from(".section-lede", {
+          autoAlpha: 0,
+          y: 18,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: ".section-lede",
+            start: "top 88%",
+            toggleActions: "play none none reverse",
+          },
+          stagger: 0.05,
+        });
+
+        const words = gsap.utils.toArray(".witness-quote .word");
+        if (words.length) {
+          gsap.to(words, {
+            opacity: 1,
+            stagger: 0.04,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".witness-quote",
+              start: "top 75%",
+              end: "bottom 50%",
+              scrub: 0.5,
+            },
+          });
+        }
+
+        gsap.from(".cinema-media", {
+          autoAlpha: 0,
+          y: 36,
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".cinema",
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        gsap.from(".cinema-copy", {
+          autoAlpha: 0,
+          y: 36,
+          duration: 1,
+          delay: 0.08,
+          scrollTrigger: {
+            trigger: ".cinema",
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        gsap.utils.toArray(".player img").forEach((img) => {
+          gsap.fromTo(
+            img,
+            { scale: 1.9 },
+            {
+              scale: 1.65,
+              ease: "none",
+              scrollTrigger: {
+                trigger: img.closest(".player"),
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            }
+          );
+        });
+
+        gsap.from(".reel-item", {
+          autoAlpha: 0,
+          y: 40,
+          duration: 0.85,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".reel",
+            start: "top 88%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        /* Reel horizontal nudge on scroll velocity */
+        if (isFine) {
+          const reel = document.getElementById("reel");
+          if (reel) {
+            ScrollTrigger.create({
+              trigger: reel,
+              start: "top bottom",
+              end: "bottom top",
+              onUpdate: (self) => {
+                const nudge = gsap.utils.clamp(-40, 40, self.getVelocity() / 80);
+                gsap.to(reel, { x: -nudge, duration: 0.6, ease: "power2.out", overwrite: "auto" });
+              },
+            });
+          }
+        }
+
+        gsap.from(".creds div", {
+          autoAlpha: 0,
+          y: 24,
+          duration: 0.7,
+          stagger: 0.07,
+          scrollTrigger: {
+            trigger: ".creds",
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        gsap.utils.toArray(".count").forEach((el) => {
+          const to = parseFloat(el.getAttribute("data-to") || "0");
+          const obj = { v: 0 };
+          const tween = gsap.to(obj, {
+            v: to,
+            duration: 1.4,
+            ease: "power2.out",
+            paused: true,
+            onUpdate: () => {
+              el.textContent = Math.round(obj.v);
+            },
+          });
+          ScrollTrigger.create({
+            trigger: el,
+            start: "top 90%",
+            onEnter: () => tween.play(),
+          });
+        });
+
+        gsap.from(".price-list > li", {
+          autoAlpha: 0,
+          y: 28,
+          duration: 0.75,
+          stagger: 0.07,
+          scrollTrigger: {
+            trigger: ".price-list",
+            start: "top 88%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        gsap.from(".group-note", {
+          autoAlpha: 0,
+          y: 32,
+          duration: 0.9,
+          scrollTrigger: {
+            trigger: ".group-note",
+            start: "top 88%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        gsap.from(".reach li", {
+          autoAlpha: 0,
+          y: 22,
+          duration: 0.7,
+          stagger: 0.07,
+          scrollTrigger: {
+            trigger: ".reach",
+            start: "top 92%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+
+      if (bandTrack && live) {
+        const total = bandTrack.scrollWidth / 3;
+        const loop = gsap.to(bandTrack, {
+          x: -total,
+          duration: 30,
           ease: "none",
           repeat: -1,
         });
-
         ScrollTrigger.create({
+          trigger: ".band",
+          start: "top bottom",
+          end: "bottom top",
           onUpdate: (self) => {
-            const v = Math.min(Math.abs(self.getVelocity()) / 800, 2.5);
-            mq.timeScale(1 + v);
+            loop.timeScale(gsap.utils.clamp(0.5, 2.6, 1 + Math.abs(self.getVelocity()) / 1600));
           },
         });
       }
 
-      /* Generic section enters */
-      if (live) {
-        gsap.utils.toArray("[data-enter]").forEach((el) => {
-          if (el.closest(".hero")) return;
-          gsap.fromTo(
-            el,
-            { autoAlpha: 0, y: 40 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.8,
-              scrollTrigger: {
-                trigger: el,
-                start: "top 90%",
-                toggleActions: "play none none none",
-              },
-            }
-          );
-        });
+      /* Method carousel — horizontal pin scrub with HUD (Zeigarnik) */
+      const methodStep = document.getElementById("methodStep");
+      const methodTag = document.getElementById("methodTag");
+      const methodBar = document.getElementById("methodBar");
+      const moves = gsap.utils.toArray(".move");
 
-        /* Heading clip / scrub */
-        gsap.utils.toArray(".anim-head").forEach((h) => {
-          gsap.fromTo(
-            h,
-            { y: 36, autoAlpha: 0.35 },
-            {
-              y: 0,
-              autoAlpha: 1,
-              ease: "none",
-              scrollTrigger: {
-                trigger: h,
-                start: "top 92%",
-                end: "top 55%",
-                scrub: true,
-              },
-            }
-          );
-        });
+      if (methodTrack && isDesktop && live && moves.length) {
+        const getScroll = () => Math.max(0, methodTrack.scrollWidth - window.innerWidth);
 
-        /* Featured quote scrub */
-        gsap.fromTo(
-          ".quote-panel blockquote",
-          { autoAlpha: 0.25, y: 36 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".quote-panel",
-              start: "top 88%",
-              end: "top 45%",
-              scrub: true,
-            },
-          }
-        );
-
-        gsap.fromTo(
-          ".feature-row",
-          { autoAlpha: 0, y: 40 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.85,
-            scrollTrigger: {
-              trigger: ".feature-row",
-              start: "top 88%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-
-        /* Kickers draw */
-        gsap.utils.toArray(".kicker").forEach((k) => {
-          gsap.fromTo(
-            k,
-            { autoAlpha: 0, x: -18 },
-            {
-              autoAlpha: 1,
-              x: 0,
-              duration: 0.6,
-              scrollTrigger: {
-                trigger: k,
-                start: "top 92%",
-                toggleActions: "play none none none",
-              },
-            }
-          );
-        });
-      } else {
-        gsap.set("[data-enter], [data-film], .anim-head, .kicker", { clearProps: "all" });
-      }
-
-      /* Film reveals */
-      if (live) {
-        const films = gsap.utils.toArray("[data-film]");
-        gsap.set(films, { autoAlpha: 0, y: 32 });
-
-        ScrollTrigger.batch(films, {
-          start: "top 92%",
-          once: true,
-          onEnter: (batch) =>
-            gsap.to(batch, {
-              autoAlpha: 1,
-              y: 0,
-              stagger: 0.08,
-              duration: 0.7,
-              overwrite: true,
-            }),
-        });
-      }
-
-      /* Credo highlight as you scroll — Miller + Zeigarnik */
-      if (live) {
-        gsap.utils.toArray(".credo article").forEach((article) => {
-          ScrollTrigger.create({
-            trigger: article,
-            start: "top 65%",
-            end: "bottom 45%",
-            onEnter: () => article.classList.add("is-on"),
-            onEnterBack: () => article.classList.add("is-on"),
-            onLeave: () => article.classList.remove("is-on"),
-            onLeaveBack: () => article.classList.remove("is-on"),
-          });
-
-          gsap.fromTo(
-            article,
-            { autoAlpha: 0, x: 28 },
-            {
-              autoAlpha: 1,
-              x: 0,
-              duration: 0.7,
-              scrollTrigger: {
-                trigger: article,
-                start: "top 88%",
-                toggleActions: "play none none none",
-              },
-            }
-          );
-        });
-
-        gsap.from(".glance div", {
-          autoAlpha: 0,
-          y: 20,
-          stagger: 0.08,
-          duration: 0.55,
+        const scrubTween = gsap.to(methodTrack, {
+          x: () => -getScroll(),
+          ease: "none",
           scrollTrigger: {
-            trigger: ".glance",
-            start: "top 85%",
-            toggleActions: "play none none none",
+            trigger: "#methodPin",
+            start: "top top",
+            end: () => `+=${getScroll() * 1.15}`,
+            pin: true,
+            scrub: 0.65,
+            snap: {
+              snapTo: 1 / (moves.length - 1),
+              duration: 0.35,
+              ease: "power1.inOut",
+            },
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const idx = Math.min(
+                moves.length - 1,
+                Math.round(self.progress * (moves.length - 1))
+              );
+              const move = moves[idx];
+              if (methodStep) methodStep.textContent = move.getAttribute("data-step") || "01";
+              if (methodTag) methodTag.textContent = move.getAttribute("data-tag") || "";
+              if (methodBar) gsap.set(methodBar, { scaleX: (idx + 1) / moves.length });
+            },
           },
         });
-      }
 
-      /* Counters */
-      document.querySelectorAll(".count").forEach((el) => {
-        const to = Number(el.dataset.to);
-        const obj = { v: 0 };
-        ScrollTrigger.create({
-          trigger: el,
-          start: "top 95%",
-          once: true,
-          onEnter: () =>
-            gsap.to(obj, {
-              v: to,
-              duration: live ? 1.45 : 0,
-              ease: "power2.out",
-              onUpdate: () => {
-                el.textContent = String(Math.round(obj.v));
-              },
-            }),
-        });
-      });
+        moves.forEach((move) => {
+          const index = move.querySelector(".move-index");
+          const copy = move.querySelector(".move-copy");
+          const ghost = move.querySelector(".move-ghost");
 
-      /* Rates horizontal scrub + focus card */
-      if (track) {
-        const rates = gsap.utils.toArray(".rate");
-        const getDist = () => Math.max(0, track.scrollWidth - innerWidth);
-
-        if (isDesktop && live) {
-          gsap.set(rates, { autoAlpha: 0.35, scale: 0.94 });
-
-          const rateTween = gsap.to(track, {
-            x: () => -getDist(),
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#ratesPin",
-              start: "top 22%",
-              end: () => `+=${getDist() + 160}`,
-              pin: true,
-              scrub: 0.55,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-              onUpdate: (self) => {
-                const i = Math.min(rates.length - 1, Math.round(self.progress * (rates.length - 1)));
-                rates.forEach((r, idx) => r.classList.toggle("is-focus", idx === i));
-              },
-            },
-          });
-
-          rates.forEach((rate) => {
-            gsap.to(rate, {
-              autoAlpha: 1,
-              scale: 1,
-              ease: "none",
-              scrollTrigger: {
-                trigger: rate,
-                containerAnimation: rateTween,
-                start: "left 85%",
-                end: "left 45%",
-                scrub: true,
-              },
-            });
-
+          if (ghost) {
             gsap.fromTo(
-              rate.querySelector(".cost"),
-              { y: 24, autoAlpha: 0.3 },
+              ghost,
+              { x: 80, autoAlpha: 0.02 },
+              {
+                x: 0,
+                autoAlpha: 0.045,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: move,
+                  containerAnimation: scrubTween,
+                  start: "left 90%",
+                  end: "left 30%",
+                  scrub: true,
+                },
+              }
+            );
+          }
+
+          if (index) {
+            gsap.fromTo(
+              index,
+              { y: 60, autoAlpha: 0.15 },
+              {
+                y: 0,
+                autoAlpha: 0.45,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: move,
+                  containerAnimation: scrubTween,
+                  start: "left 80%",
+                  end: "left 35%",
+                  scrub: true,
+                },
+              }
+            );
+          }
+
+          if (copy) {
+            gsap.fromTo(
+              copy,
+              { y: 50, autoAlpha: 0.2 },
               {
                 y: 0,
                 autoAlpha: 1,
                 ease: "none",
                 scrollTrigger: {
-                  trigger: rate,
-                  containerAnimation: rateTween,
-                  start: "left 80%",
+                  trigger: move,
+                  containerAnimation: scrubTween,
+                  start: "left 75%",
                   end: "left 40%",
                   scrub: true,
                 },
               }
             );
-          });
-
-          gsap.to(".rates-hint .scroll-arr", {
-            x: 8,
-            duration: 0.8,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-          });
-        } else {
-          gsap.set(track, { clearProps: "transform" });
-          gsap.set(rates, { clearProps: "all" });
-          const pin = document.getElementById("ratesPin");
-          if (pin) {
-            pin.style.overflowX = "auto";
-            pin.style.webkitOverflowScrolling = "touch";
           }
-        }
+        });
+      } else if (live) {
+        moves.forEach((panel) => {
+          const inner = panel.querySelector(".move-inner");
+          if (!inner) return;
+          gsap.from(inner, {
+            autoAlpha: 0,
+            y: 40,
+            duration: 0.95,
+            scrollTrigger: {
+              trigger: panel,
+              start: "top 78%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
       }
 
-      /* Formula rows */
+      const priceItems = gsap.utils.toArray(".price-list > li");
+      const syncPrices = () => {
+        const center = window.innerHeight * 0.48;
+        let best = null;
+        let bestDist = Infinity;
+        priceItems.forEach((li) => {
+          const r = li.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > window.innerHeight) return;
+          const mid = (r.top + r.bottom) / 2;
+          const d = Math.abs(mid - center);
+          if (d < bestDist) {
+            bestDist = d;
+            best = li;
+          }
+        });
+        priceItems.forEach((li) => {
+          const row = li.querySelector(".price-row");
+          const open = li === best;
+          li.classList.toggle("is-open", open);
+          row?.setAttribute("aria-expanded", String(open));
+        });
+      };
+
+      ScrollTrigger.create({
+        trigger: ".price-list",
+        start: "top bottom",
+        end: "bottom top",
+        onUpdate: syncPrices,
+        onEnter: syncPrices,
+        onEnterBack: syncPrices,
+      });
+
       if (live) {
-        gsap.from(".formula li", {
-          autoAlpha: 0,
-          x: 24,
-          stagger: 0.1,
-          duration: 0.55,
-          scrollTrigger: {
-            trigger: ".formula",
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-
-      /* About sticky scrub */
-      if (isDesktop && live) {
-        gsap.to(".about-sticky", {
-          y: 60,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#method",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-          },
-        });
-      }
-
-      /* Magnetic + tilts */
-      if (isFine && live) {
-        document.querySelectorAll(".magnetic").forEach((btn) => {
-          btn.addEventListener("pointermove", (e) => {
-            const r = btn.getBoundingClientRect();
-            gsap.to(btn, {
-              x: (e.clientX - (r.left + r.width / 2)) * 0.3,
-              y: (e.clientY - (r.top + r.height / 2)) * 0.3,
-              duration: 0.28,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
-          });
-          btn.addEventListener("pointerleave", () => {
-            gsap.to(btn, {
-              x: 0,
-              y: 0,
-              duration: 0.55,
-              ease: "elastic.out(1, 0.4)",
-              overwrite: "auto",
-            });
-          });
-        });
-
-        document.querySelectorAll(".rate, .credo article").forEach((card) => {
-          card.addEventListener("pointermove", (e) => {
-            const r = card.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width - 0.5;
-            const y = (e.clientY - r.top) / r.height - 0.5;
-            gsap.to(card, {
-              rotateY: x * 7,
-              rotateX: -y * 5,
-              y: -3,
-              transformPerspective: 800,
-              duration: 0.3,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
-          });
-          card.addEventListener("pointerleave", () => {
-            gsap.to(card, {
-              rotateY: 0,
-              rotateX: 0,
-              y: 0,
-              duration: 0.45,
-              ease: "power3.out",
-              overwrite: "auto",
-            });
-          });
-        });
-      }
-
-      /* Contact Peak-End sequence */
-      if (live) {
-        const contactTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".contact-board",
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        });
-
-        contactTl
-          .fromTo(
-            ".contact-board",
-            { autoAlpha: 0, y: 60, scale: 0.98 },
-            { autoAlpha: 1, y: 0, scale: 1, duration: 0.9 }
-          )
-          .from(
-            ".contact-blast h2, .contact-blast p, .contact-blast .btn",
-            { autoAlpha: 0, y: 24, stagger: 0.1, duration: 0.55 },
-            "-=0.4"
-          )
-          .from(
-            ".ways a, .ways .way",
-            { autoAlpha: 0, x: 20, stagger: 0.08, duration: 0.45 },
-            "-=0.25"
+        priceItems.forEach((li) => {
+          const line = li.querySelector(".price-line");
+          if (!line) return;
+          gsap.fromTo(
+            line,
+            { scaleX: 0 },
+            {
+              scaleX: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: li,
+                start: "top 85%",
+                end: "top 50%",
+                scrub: true,
+              },
+            }
           );
+        });
       }
 
       if (document.fonts?.ready) {
         document.fonts.ready.then(() => ScrollTrigger.refresh());
       }
+
+      return () => {
+        document.body.style.overflow = "";
+      };
     }
   );
+
+  window.addEventListener("pagehide", () => killField?.());
 })();
