@@ -7,6 +7,7 @@
   const toggle = document.getElementById("navToggle");
   const progress = document.getElementById("progress");
   const methodTrack = document.getElementById("methodTrack");
+  const recordTrack = document.getElementById("recordTrack");
   const bandTrack = document.getElementById("bandTrack");
   const field = document.getElementById("field");
 
@@ -375,6 +376,28 @@
           stagger: 0.05,
         });
 
+        /* Accent wash pulse on buttons */
+        gsap.utils.toArray(".btn").forEach((btn) => {
+          btn.addEventListener("mouseenter", () => {
+            gsap.fromTo(
+              btn,
+              { boxShadow: "0 0 0 0 rgba(33, 92, 78, 0)" },
+              {
+                boxShadow: "0 12px 28px -8px rgba(33, 92, 78, 0.45)",
+                duration: 0.35,
+                overwrite: "auto",
+              }
+            );
+          });
+          btn.addEventListener("mouseleave", () => {
+            gsap.to(btn, {
+              boxShadow: "0 0 0 0 rgba(33, 92, 78, 0)",
+              duration: 0.45,
+              overwrite: "auto",
+            });
+          });
+        });
+
         const words = gsap.utils.toArray(".witness-quote .word");
         if (words.length) {
           gsap.to(words, {
@@ -543,6 +566,139 @@
         });
       }
 
+      /* Record carousel — always horizontal, peek slides + focus morph */
+      const recordStep = document.getElementById("recordStep");
+      const recordTag = document.getElementById("recordTag");
+      const recordBar = document.getElementById("recordBar");
+      const marks = gsap.utils.toArray(".mark");
+
+      if (recordTrack && live && marks.length) {
+        const getRecordScroll = () => Math.max(0, recordTrack.scrollWidth - window.innerWidth);
+
+        const setMarkFocus = (activeIdx) => {
+          marks.forEach((mark, i) => {
+            const dist = Math.abs(i - activeIdx);
+            const isActive = i === activeIdx;
+            mark.classList.toggle("is-active", isActive);
+            gsap.to(mark, {
+              scale: isActive ? 1 : dist === 1 ? 0.94 : 0.88,
+              opacity: isActive ? 1 : dist === 1 ? 0.58 : 0.38,
+              duration: 0.3,
+              overwrite: "auto",
+              ease: "power2.out",
+            });
+          });
+        };
+
+        setMarkFocus(0);
+
+        const recordHead = document.querySelector(".record-head");
+
+        const recordTween = gsap.to(recordTrack, {
+          x: () => -getRecordScroll(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#recordPin",
+            start: "center center",
+            end: () => `+=${Math.max(getRecordScroll() * 1.35, window.innerHeight * 2.2)}`,
+            pin: true,
+            scrub: 0.55,
+            snap: {
+              snapTo: 1 / Math.max(1, marks.length - 1),
+              duration: 0.4,
+              ease: "power1.inOut",
+            },
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const idx = Math.min(
+                marks.length - 1,
+                Math.round(self.progress * (marks.length - 1))
+              );
+              const mark = marks[idx];
+              if (recordStep) recordStep.textContent = mark.getAttribute("data-step") || "01";
+              if (recordTag) recordTag.textContent = mark.getAttribute("data-tag") || "";
+              if (recordBar) gsap.set(recordBar, { scaleX: (idx + 1) / marks.length });
+              if (recordHead) {
+                gsap.set(recordHead, {
+                  autoAlpha: self.progress < 0.06 ? 1 : Math.max(0, 1 - (self.progress - 0.06) * 8),
+                });
+              }
+              if (setMarkFocus._last !== idx) {
+                setMarkFocus._last = idx;
+                setMarkFocus(idx);
+              }
+            },
+          },
+        });
+
+        marks.forEach((mark) => {
+          const stat = mark.querySelector(".mark-stat");
+          const copy = mark.querySelector(".mark-copy");
+          const ghost = mark.querySelector(".mark-ghost");
+
+          if (ghost) {
+            gsap.fromTo(
+              ghost,
+              { y: 40, scale: 0.92 },
+              {
+                y: -20,
+                scale: 1.05,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: mark,
+                  containerAnimation: recordTween,
+                  start: "left 95%",
+                  end: "left 5%",
+                  scrub: true,
+                },
+              }
+            );
+          }
+
+          if (stat) {
+            gsap.fromTo(
+              stat,
+              { y: 80, scale: 0.82, rotate: -3 },
+              {
+                y: 0,
+                scale: 1,
+                rotate: 0,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: mark,
+                  containerAnimation: recordTween,
+                  start: "left 85%",
+                  end: "left 40%",
+                  scrub: true,
+                },
+              }
+            );
+          }
+
+          if (copy) {
+            gsap.fromTo(
+              copy,
+              { y: 36, autoAlpha: 0.2 },
+              {
+                y: 0,
+                autoAlpha: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: mark,
+                  containerAnimation: recordTween,
+                  start: "left 78%",
+                  end: "left 42%",
+                  scrub: true,
+                },
+              }
+            );
+          }
+        });
+      } else if (!live && marks.length) {
+        marks.forEach((mark, i) => mark.classList.toggle("is-active", i === 0));
+      }
+
       /* Method carousel — horizontal pin scrub with HUD (Zeigarnik) */
       const methodStep = document.getElementById("methodStep");
       const methodTag = document.getElementById("methodTag");
@@ -557,7 +713,7 @@
           ease: "none",
           scrollTrigger: {
             trigger: "#methodPin",
-            start: "top top",
+            start: "center center",
             end: () => `+=${getScroll() * 1.15}`,
             pin: true,
             scrub: 0.65,
