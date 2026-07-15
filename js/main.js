@@ -600,12 +600,12 @@
           scrollTrigger: {
             trigger: "#recordPin",
             start: "center center",
-            end: () => `+=${Math.max(getRecordScroll() * 1.35, window.innerHeight * 2.2)}`,
+            end: () => `+=${Math.max(getRecordScroll() * 0.55, window.innerHeight * 0.9)}`,
             pin: true,
-            scrub: 0.55,
+            scrub: 0.35,
             snap: {
               snapTo: 1 / Math.max(1, marks.length - 1),
-              duration: 0.4,
+              duration: 0.25,
               ease: "power1.inOut",
             },
             anticipatePin: 1,
