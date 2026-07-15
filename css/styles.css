@@ -712,18 +712,21 @@ img {
 /* Horizontal student reel — portrait cards */
 .reel {
   display: flex;
+  justify-content: center;
   gap: 1.25rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 0 var(--gutter) 1rem;
+  width: min(100% - var(--gutter) * 2, var(--max));
+  margin-inline: auto;
+  padding: 0 0 1rem;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: var(--accent) transparent;
 }
 
 .reel-item {
-  flex: 0 0 min(72vw, 340px);
-  scroll-snap-align: start;
+  flex: 0 0 min(22vw, 300px);
+  scroll-snap-align: center;
 }
 
 /* ========== RECORD — scroll-scrubbed credentials carousel ========== */
@@ -1532,8 +1535,15 @@ img {
     transform-origin: center 28%;
   }
 
+  .reel {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0 var(--gutter) 1rem;
+  }
+
   .reel-item {
-    flex-basis: min(78vw, 300px);
+    flex-basis: min(70vw, 280px);
+    scroll-snap-align: center;
   }
 
   /* Record stays a horizontal carousel on all sizes */

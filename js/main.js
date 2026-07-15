@@ -465,22 +465,6 @@
           },
         });
 
-        /* Reel horizontal nudge on scroll velocity */
-        if (isFine) {
-          const reel = document.getElementById("reel");
-          if (reel) {
-            ScrollTrigger.create({
-              trigger: reel,
-              start: "top bottom",
-              end: "bottom top",
-              onUpdate: (self) => {
-                const nudge = gsap.utils.clamp(-40, 40, self.getVelocity() / 80);
-                gsap.to(reel, { x: -nudge, duration: 0.6, ease: "power2.out", overwrite: "auto" });
-              },
-            });
-          }
-        }
-
         gsap.from(".creds div", {
           autoAlpha: 0,
           y: 24,
