@@ -1,4 +1,4 @@
-/* Chapter narrative — editorial kinetic
+/* Chapter narrative: editorial kinetic
    Type floor: 1.5rem. Warm taupe + forest teal. */
 
 :root {
@@ -114,7 +114,7 @@ img {
   will-change: transform;
 }
 
-/* Nav — Jakob: expected top bar; Fitts: large targets */
+/* Nav. Jakob: expected top bar; Fitts: large targets */
 .nav {
   position: fixed;
   inset: 0 0 auto;
@@ -550,7 +550,7 @@ img {
   padding-top: 1.25rem;
 }
 
-/* Portrait players — phone-shot clips, crop into the center frame */
+/* Portrait players: phone-shot clips, crop into the center frame */
 .player {
   position: relative;
   display: block;
@@ -709,7 +709,7 @@ img {
   opacity: 0.8;
 }
 
-/* Horizontal student reel — portrait cards */
+/* Horizontal student reel: portrait cards */
 .reel {
   display: flex;
   justify-content: center;
@@ -729,7 +729,7 @@ img {
   scroll-snap-align: center;
 }
 
-/* ========== RECORD — scroll-scrubbed credentials carousel ========== */
+/* ========== RECORD: scroll-scrubbed credentials carousel ========== */
 .record {
   padding: 0;
 }
@@ -1473,6 +1473,50 @@ img {
   border-color: var(--accent);
 }
 
+/* ========== 404 ========== */
+.notfound {
+  min-height: 78svh;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 1.15rem;
+  padding: 8rem var(--gutter) 4rem;
+  text-align: center;
+}
+
+.notfound-code {
+  font-family: var(--display);
+  font-size: clamp(1.55rem, 2vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.notfound-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(3.5rem, 11vw, 7rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+
+.notfound-lede {
+  font-size: clamp(1.55rem, 2.4vw, 1.9rem);
+  color: var(--muted);
+  max-width: 48ch;
+  line-height: 1.4;
+}
+
+.notfound-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem 1.75rem;
+  padding-top: 0.5rem;
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 960px) {
   .nav-toggle {
@@ -1511,6 +1555,31 @@ img {
     font-size: var(--type-min);
   }
 
+  /* 404 header has no toggle, so its links stay in the bar */
+  .nav-flat .nav-links {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    background: none;
+    padding: 0;
+    gap: 0.75rem 1.15rem;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .nav-flat .nav-links a {
+    font-family: var(--body);
+    font-size: 1.4rem;
+  }
+
+  .nav-flat .nav-cta {
+    margin-top: 0;
+    font-size: 1.4rem;
+  }
+
   .cinema,
   .group-note {
     grid-template-columns: 1fr;
@@ -1546,34 +1615,87 @@ img {
     scroll-snap-align: center;
   }
 
-  /* Record stays a horizontal carousel on all sizes */
-  .record-track {
-    flex-direction: row;
-    width: max-content;
-    padding-inline: 3vw;
-    gap: 0.75rem;
+  /* Record and method turn into swipeable carousels on touch widths */
+  .record-pin,
+  .method-pin {
+    display: block;
+    min-height: 0;
+    padding-block: clamp(2rem, 6vw, 3rem);
   }
 
-  .mark {
-    flex: 0 0 96vw;
-    width: 96vw;
-    height: clamp(24rem, 58vh, 32rem);
-    min-height: 0;
-    border: 1px solid rgba(61, 154, 130, 0.22);
+  .record-head,
+  .record-hud,
+  .record-bar,
+  .method-hud,
+  .method-bar {
+    position: static;
+    transform: none;
+    width: min(100% - var(--gutter) * 2, var(--max));
+    margin-inline: auto;
+  }
+
+  .record-head {
+    margin-bottom: 1.1rem;
+  }
+
+  .record-hud,
+  .method-hud {
+    display: flex;
+    margin-bottom: 0.65rem;
+  }
+
+  .record-bar,
+  .method-bar {
+    display: block;
+    margin-bottom: 1.25rem;
+  }
+
+  .record-track,
+  .method-track {
+    flex-direction: row;
+    width: auto;
+    max-width: 100%;
+    gap: 0.9rem;
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .record-track::-webkit-scrollbar,
+  .method-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mark,
+  .move {
+    flex: 0 0 min(84vw, 30rem);
+    width: auto;
+    height: auto;
+    min-height: clamp(24rem, 56vh, 30rem);
+    scroll-snap-align: center;
+    transition: opacity 0.35s var(--ease), border-color 0.35s;
+  }
+
+  .mark:not(.is-active),
+  .move:not(.is-active) {
+    opacity: 0.5;
+  }
+
+  .move {
+    border: 1px solid var(--line);
+  }
+
+  .move.is-active {
+    border-color: var(--accent);
   }
 
   .mark-ghost {
     display: block;
     font-size: clamp(4.5rem, 20vw, 8rem);
-  }
-
-  .record-hud,
-  .record-bar {
-    display: flex;
-  }
-
-  .record-bar {
-    display: block;
   }
 
   .mark-inner {
@@ -1588,28 +1710,6 @@ img {
 
   .mark-stat-word {
     font-size: clamp(3rem, 14vw, 4.5rem);
-  }
-
-  .method-track {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .move {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .move:last-child {
-    border-bottom: 0;
-  }
-
-  .method-hud,
-  .method-bar {
-    display: none;
   }
 
   .move-ghost {
@@ -1661,6 +1761,10 @@ img {
 }
 
 @media (max-width: 600px) {
+  .nav-flat .nav-links a:not(.nav-cta) {
+    display: none;
+  }
+
   .aside-list {
     grid-template-columns: 1fr;
   }
@@ -1692,6 +1796,25 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* No scrubbed pinning, so both tracks scroll on their own */
+  .record-track,
+  .method-track {
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    gap: 0.9rem;
+  }
+
+  .mark,
+  .move {
+    flex: 0 0 min(78vw, 44rem);
+    width: auto;
+    scroll-snap-align: center;
+  }
+
   .open-scroll i {
     animation: none;
   }

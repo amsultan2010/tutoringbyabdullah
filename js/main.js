@@ -1,4 +1,4 @@
-/* Chapter narrative — GSAP + ScrollTrigger + constellation field */
+/* Chapter narrative: GSAP + ScrollTrigger + constellation field */
 
 (() => {
   gsap.registerPlugin(ScrollTrigger);
@@ -136,7 +136,7 @@
       const t = time * 0.001;
       ctx.clearRect(0, 0, w, h);
 
-      /* Soft terrain ridges — continuous wave motion */
+      /* Soft terrain ridges: continuous wave motion */
       ctx.lineWidth = 1;
       const rows = 9;
       for (let i = 0; i < rows; i++) {
@@ -217,12 +217,14 @@
   mm.add(
     {
       isDesktop: "(min-width: 961px)",
+      isMobile: "(max-width: 960px)",
       isFine: "(pointer: fine)",
       reduceMotion: "(prefers-reduced-motion: reduce)",
     },
     (ctx) => {
       const { isDesktop, isFine, reduceMotion } = ctx.conditions;
       const live = !reduceMotion;
+      const cleanups = [];
 
       gsap.defaults({ ease: "power3.out" });
 
@@ -258,7 +260,7 @@
           const leave = () => gsap.to(el, { x: 0, y: 0, duration: 0.65, ease: "elastic.out(1, 0.45)" });
           el.addEventListener("mousemove", move);
           el.addEventListener("mouseleave", leave);
-          ctx.add(() => {
+          cleanups.push(() => {
             el.removeEventListener("mousemove", move);
             el.removeEventListener("mouseleave", leave);
           });
@@ -266,7 +268,7 @@
       }
 
       if (live) {
-        /* Open — line masks + soft exit scrub */
+        /* Open: line masks + soft exit scrub */
         gsap.set(".open-line > span", { yPercent: 120 });
         gsap.set([".open-meta", ".open-role", ".open-scroll"], { autoAlpha: 0, y: 20 });
 
@@ -550,13 +552,54 @@
         });
       }
 
-      /* Record carousel — always horizontal, peek slides + focus morph */
+      /* Touch widths: the tracks scroll natively, so the HUD follows the scroll */
+      const wireSwipe = (track, items, stepEl, tagEl, barEl) => {
+        const update = () => {
+          const r = track.getBoundingClientRect();
+          const center = r.left + r.width / 2;
+          let idx = 0;
+          let best = Infinity;
+          items.forEach((el, i) => {
+            const b = el.getBoundingClientRect();
+            const d = Math.abs((b.left + b.right) / 2 - center);
+            if (d < best) {
+              best = d;
+              idx = i;
+            }
+          });
+          items.forEach((el, i) => el.classList.toggle("is-active", i === idx));
+          const item = items[idx];
+          if (stepEl) stepEl.textContent = item.getAttribute("data-step") || "01";
+          if (tagEl) tagEl.textContent = item.getAttribute("data-tag") || "";
+          if (barEl) barEl.style.transform = `scaleX(${(idx + 1) / items.length})`;
+        };
+
+        let queued = false;
+        const onScroll = () => {
+          if (queued) return;
+          queued = true;
+          requestAnimationFrame(() => {
+            queued = false;
+            update();
+          });
+        };
+
+        track.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        cleanups.push(() => {
+          track.removeEventListener("scroll", onScroll);
+          window.removeEventListener("resize", onScroll);
+        });
+        update();
+      };
+
+      /* Record carousel: always horizontal, peek slides + focus morph */
       const recordStep = document.getElementById("recordStep");
       const recordTag = document.getElementById("recordTag");
       const recordBar = document.getElementById("recordBar");
       const marks = gsap.utils.toArray(".mark");
 
-      if (recordTrack && live && marks.length) {
+      if (recordTrack && isDesktop && live && marks.length) {
         const getRecordScroll = () => Math.max(0, recordTrack.scrollWidth - window.innerWidth);
 
         const setMarkFocus = (activeIdx) => {
@@ -679,11 +722,11 @@
             );
           }
         });
-      } else if (!live && marks.length) {
-        marks.forEach((mark, i) => mark.classList.toggle("is-active", i === 0));
+      } else if (recordTrack && marks.length) {
+        wireSwipe(recordTrack, marks, recordStep, recordTag, recordBar);
       }
 
-      /* Method carousel — horizontal pin scrub with HUD (Zeigarnik) */
+      /* Method carousel: horizontal pin scrub with HUD (Zeigarnik) */
       const methodStep = document.getElementById("methodStep");
       const methodTag = document.getElementById("methodTag");
       const methodBar = document.getElementById("methodBar");
@@ -783,21 +826,8 @@
             );
           }
         });
-      } else if (live) {
-        moves.forEach((panel) => {
-          const inner = panel.querySelector(".move-inner");
-          if (!inner) return;
-          gsap.from(inner, {
-            autoAlpha: 0,
-            y: 40,
-            duration: 0.95,
-            scrollTrigger: {
-              trigger: panel,
-              start: "top 78%",
-              toggleActions: "play none none reverse",
-            },
-          });
-        });
+      } else if (methodTrack && moves.length) {
+        wireSwipe(methodTrack, moves, methodStep, methodTag, methodBar);
       }
 
       const priceItems = gsap.utils.toArray(".price-list > li");
@@ -858,6 +888,7 @@
       }
 
       return () => {
+        cleanups.forEach((fn) => fn());
         document.body.style.overflow = "";
       };
     }
