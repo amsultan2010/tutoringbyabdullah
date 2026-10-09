@@ -88,6 +88,12 @@ section[id] {
   scroll-margin-top: calc(var(--nav-h) + var(--safe-t));
 }
 
+/* these two fill the screen, so they go all the way under the bar */
+#open,
+#record {
+  scroll-margin-top: 0;
+}
+
 /* a pointer cursor only where there is a pointer */
 @media (hover: hover) {
   button,
@@ -107,6 +113,20 @@ section[id] {
 .band {
   --ring: var(--soft);
   --rule: var(--line-ink);
+}
+
+/* the smooth scroller's own rules, from lenis.css */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
 .sprite {
@@ -1329,13 +1349,33 @@ section[id] {
   font-variant-numeric: tabular-nums;
 }
 
+/* the compass ring a script swings round the price the pen is on */
+.price-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.9em;
+  height: 1.9em;
+  max-width: none;
+  translate: -50% -54%;
+  rotate: -100deg;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.price-ring circle {
+  fill: none;
+  stroke: var(--accent-bright);
+  stroke-width: var(--pen);
+}
+
 .price-cost em {
   font-family: var(--body);
   font-style: normal;
   font-size: var(--type-min);
   font-weight: 500;
   opacity: 0.65;
-  margin-left: 0.35rem;
+  margin-left: 0.6rem;
 }
 
 .price-detail {
@@ -1496,19 +1536,22 @@ section[id] {
   transition: color var(--t);
 }
 
-.reach .icon {
+/* a one-glyph window the arrow leaves and comes back through */
+.swap {
   align-self: center;
+  overflow: hidden;
   color: var(--accent);
 }
 
 /* until a script takes the row over, plain css still shows the state */
-.reach a:not(.is-wired):hover strong,
-.reach a:focus-visible strong {
+.reach li:not(.is-wired) a:hover strong,
+.reach a:focus-visible strong,
+.reach li.is-hot strong {
   color: var(--accent);
 }
 
-.reach a.is-hot strong {
-  color: var(--accent);
+.reach li.is-hot {
+  --rule: var(--accent);
 }
 
 .reach a:active strong {
