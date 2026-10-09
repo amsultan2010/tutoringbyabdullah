@@ -5,6 +5,7 @@
 import { gsap, lenis, refresh } from "./motion.js";
 import { initField } from "./field.js";
 import { intro, reveals, drift, navState, prices } from "./reveals.js";
+import { record } from "./record.js";
 
 /* ---------- Markup the motion needs, the same in every mode ---------- */
 
@@ -59,6 +60,8 @@ gsap.matchMedia().add(
     const scope = new AbortController();
     const mode = { wide, fine, live, signal: scope.signal };
 
+    // the pin goes first: every trigger made after it is measured with its spacer in place
+    record(mode);
     navState();
     prices(mode);
 
