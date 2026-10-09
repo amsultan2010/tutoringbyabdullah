@@ -156,6 +156,44 @@ html.lenis body {
   pointer-events: none;
 }
 
+/* the cover is in the html, so first paint is hidden before any script runs.
+   a script draws the mark on it once per session and lifts it. if the script
+   never arrives the keyframe takes it away, so the page is never left covered */
+.cover {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  animation: cover-bail 0.01s linear 5s forwards;
+}
+
+@keyframes cover-bail {
+  to { visibility: hidden; }
+}
+
+.cover-mark {
+  width: 8.25rem;
+  height: auto;
+  overflow: visible;
+  visibility: hidden;
+}
+
+.cover-ring {
+  stroke: var(--accent);
+  stroke-width: 24;
+}
+
+.cover-dot {
+  fill: var(--accent);
+}
+
+.cover-line {
+  stroke: var(--pencil);
+  stroke-width: 16;
+}
+
 /* the compass ring that follows a fine pointer. a script mounts it, so it
    never exists on touch. the real cursor stays */
 .pen {
@@ -2076,5 +2114,9 @@ html.lenis body {
 
   .field {
     opacity: 0.45;
+  }
+
+  .cover {
+    display: none;
   }
 }

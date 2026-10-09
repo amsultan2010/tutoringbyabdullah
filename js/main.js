@@ -2,7 +2,7 @@
    whole thing, touch keeps the one-shots and the loops, and reduced motion
    gets the finished page and nothing that travels. */
 
-import { gsap, lenis, refresh } from "./motion.js";
+import { gsap, lenis, refresh, still, D, E } from "./motion.js";
 import { initField } from "./field.js";
 import { intro, reveals, drift, navState, prices } from "./reveals.js";
 import { record } from "./record.js";
@@ -46,7 +46,38 @@ if (lenis) {
   document.addEventListener("menu", (e) => (e.detail.open ? lenis.stop() : lenis.start()));
 }
 
-const field = initField(document.getElementById("field"), () => matchMedia("(prefers-reduced-motion: reduce)").matches);
+const field = initField(document.getElementById("field"), still);
+
+/* ---------- The cover: the mark is constructed once per session, then lifted ---------- */
+function openCover(onLift) {
+  const cover = document.getElementById("cover");
+  if (!cover || still()) {
+    cover?.remove();
+    return onLift();
+  }
+
+  // storage can throw in a private window
+  let seen = false;
+  try {
+    seen = sessionStorage.getItem("cover") === "1";
+    sessionStorage.setItem("cover", "1");
+  } catch {}
+
+  // the first screen starts arriving as the cover starts to leave
+  const lift = () => {
+    onLift();
+    gsap.to(cover, { yPercent: -100, duration: D.base, ease: E.inOut, onComplete: () => cover.remove() });
+  };
+  if (seen) return lift();
+
+  // compass, then ruler: two rings swung, the centre set, one line ruled across
+  gsap.set(".cover-mark", { visibility: "visible" });
+  gsap
+    .timeline({ onComplete: lift })
+    .from(".cover-ring", { drawSVG: "0%", duration: 0.45, stagger: 0.1, ease: E.inOut }, 0)
+    .from(".cover-dot", { scale: 0, transformOrigin: "50% 50%", duration: D.fast, ease: E.out }, 0.3)
+    .from(".cover-line", { drawSVG: "0%", duration: D.fast, ease: E.inOut }, 0.45);
+}
 
 let introPlayed = false;
 
@@ -68,13 +99,14 @@ gsap.matchMedia().add(
     prices(mode);
 
     if (live) {
-      if (!introPlayed) intro();
+      if (!introPlayed) openCover(intro);
       introPlayed = true;
       reveals();
       drift(wide);
       if (fine) pointer(mode);
       ambient(field, mode);
     } else {
+      openCover(() => {});
       field.pause();
     }
 

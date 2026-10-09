@@ -28,6 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Fraunces:ital,opsz@0,9..144;1,9..144&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <noscript><style>.cover { display: none; }</style></noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -135,6 +136,15 @@
   </script>
 </head>
 <body>
+  <div class="cover" id="cover" aria-hidden="true">
+    <svg class="cover-mark" viewBox="0 0 512 512" width="132" height="132" fill="none">
+      <circle class="cover-ring" cx="256" cy="252" r="160"/>
+      <circle class="cover-ring" cx="256" cy="252" r="98"/>
+      <circle class="cover-dot" cx="256" cy="252" r="58"/>
+      <polyline class="cover-line" points="97,351 176,322 256,352 338,320 416,350"/>
+    </svg>
+  </div>
+
   <svg class="sprite" aria-hidden="true" width="0" height="0">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M3 12h17M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
     <symbol id="i-out" viewBox="0 0 24 24"><path d="M6 18 18 6M8 6h10v10" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
