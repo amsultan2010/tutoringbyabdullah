@@ -61,7 +61,13 @@ export function record({ wide, fine, live, signal }) {
   // from here the script owns the track, so the css scroller stands down
   section.classList.add("is-pinned");
   track.scrollLeft = 0;
-  signal.addEventListener("abort", () => section.classList.remove("is-pinned"));
+  signal.addEventListener("abort", () => {
+    section.classList.remove("is-pinned");
+    // the focus tweens are made in a scroll callback, outside the context that
+    // reverts everything else, and the pin puts the track's start back as it dies
+    gsap.killTweensOf([marks, step]);
+    gsap.set([track, marks, step], { clearProps: "transform,opacity" });
+  });
 
   const edge = 24;
   const room = () => track.parentElement.clientWidth;
