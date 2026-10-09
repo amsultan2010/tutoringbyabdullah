@@ -156,6 +156,73 @@ html.lenis body {
   pointer-events: none;
 }
 
+/* the compass ring that follows a fine pointer. a script mounts it, so it
+   never exists on touch. the real cursor stays */
+.pen {
+  position: fixed;
+  z-index: 220;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t);
+}
+
+.pen.is-active {
+  opacity: 1;
+}
+
+.pen i,
+.pen span {
+  grid-area: 1 / 1;
+}
+
+.pen i {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: var(--pen) solid var(--accent);
+  border-radius: 50%;
+  transition: scale var(--t) var(--ease), background var(--t), border-color var(--t);
+}
+
+.pen.on-ink i {
+  border-color: var(--accent-bright);
+}
+
+/* over something that can be pressed it closes to a point */
+.pen.is-hovering i {
+  scale: 0.3;
+  background: var(--accent);
+}
+
+.pen.on-ink.is-hovering i {
+  background: var(--accent-bright);
+}
+
+/* and where the press has a name, it opens to carry it */
+.pen.is-labelled i {
+  scale: 2.3;
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.pen span {
+  /* positioned, or the scaled ring paints over it */
+  position: relative;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--soft);
+  opacity: 0;
+  transition: opacity var(--t);
+}
+
+.pen.is-labelled span {
+  opacity: 1;
+}
+
 /* Atmosphere */
 .field {
   position: fixed;
@@ -1091,12 +1158,8 @@ html.lenis body {
   display: flex;
   justify-content: center;
   gap: 1.25rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
   width: min(100% - var(--gutter) * 2, var(--max));
   margin-inline: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent) transparent;
 }
 
 .reel-item {
@@ -1872,11 +1935,16 @@ html.lenis body {
     padding-inline: var(--gutter);
   }
 
+  /* four portraits stop fitting, so the row becomes a sideways scroller */
   .reel {
     width: 100%;
     justify-content: flex-start;
     padding: 0 var(--gutter) 1rem;
+    overflow: auto hidden;
+    scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--gutter);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
   }
 
   .reel-item {

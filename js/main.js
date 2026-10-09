@@ -6,6 +6,7 @@ import { gsap, lenis, refresh } from "./motion.js";
 import { initField } from "./field.js";
 import { intro, reveals, drift, navState, prices } from "./reveals.js";
 import { record } from "./record.js";
+import { pointer } from "./pointer.js";
 
 /* ---------- Markup the motion needs, the same in every mode ---------- */
 
@@ -71,6 +72,7 @@ gsap.matchMedia().add(
       introPlayed = true;
       reveals();
       drift(wide);
+      if (fine) pointer(mode);
     } else {
       field.pause();
     }
