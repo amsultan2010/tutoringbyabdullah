@@ -63,7 +63,8 @@ export function reveals() {
       { clipPath: "inset(0% 0% 0% 0%)", duration: D.base, ease: E.inOut, clearProps: "clipPath" },
     );
     const link = group.querySelector(".text-link");
-    if (link) tl.from(link, { x: -14, autoAlpha: 0, duration: D.fast, clearProps: "transform" }, 0.35);
+    // opacity, not visibility: a hidden link drops out of the tab order
+    if (link) tl.from(link, { x: -14, opacity: 0, duration: D.fast, clearProps: "transform" }, 0.35);
   });
 
   // cells hang from their top rule and unroll downward
@@ -180,7 +181,7 @@ export function reveals() {
     if (arrow) tl.from(arrow, { autoAlpha: 0, duration: D.fast }, 0.4);
   });
 
-  block(".foot", "top 97%").from(".foot > *", { y: 12, autoAlpha: 0, duration: D.fast, stagger: 0.06 });
+  block(".foot", "top 97%").from(".foot > *", { y: 12, opacity: 0, duration: D.fast, stagger: 0.06 });
 }
 
 /* ---------- Scrubbed motion with no pin ---------- */
