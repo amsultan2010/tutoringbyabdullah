@@ -1460,6 +1460,10 @@ html.lenis body {
   background: var(--pencil);
 }
 
+.price.is-active .price-line::before {
+  scale: calc(var(--point, 1) * var(--beat, 1));
+}
+
 .group-note {
   width: min(100% - var(--gutter) * 2, var(--max));
   margin: clamp(2.5rem, 5vw, 4rem) auto 0;

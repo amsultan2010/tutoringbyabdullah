@@ -7,6 +7,7 @@ import { initField } from "./field.js";
 import { intro, reveals, drift, navState, prices } from "./reveals.js";
 import { record } from "./record.js";
 import { pointer } from "./pointer.js";
+import { ambient } from "./ambient.js";
 
 /* ---------- Markup the motion needs, the same in every mode ---------- */
 
@@ -67,12 +68,12 @@ gsap.matchMedia().add(
     prices(mode);
 
     if (live) {
-      field.play();
       if (!introPlayed) intro();
       introPlayed = true;
       reveals();
       drift(wide);
       if (fine) pointer(mode);
+      ambient(field, mode);
     } else {
       field.pause();
     }
