@@ -84,6 +84,9 @@ let introPlayed = false;
 gsap.matchMedia().add(
   {
     wide: "(min-width: 961px)",
+    // gsap only runs this when at least one condition matches, and on a phone
+    // none of the others do, so the complement of wide is listed too
+    narrow: "(max-width: 960px)",
     fine: "(hover: hover) and (pointer: fine)",
     reduce: "(prefers-reduced-motion: reduce)",
   },
