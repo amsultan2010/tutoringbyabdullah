@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="math and science 10 tutoring by abdullah sultan for ais-r students. clear explanations, focused study sessions, and friendly peer support.">
   <title>abdullah sultan | math &amp; science tutoring</title>
   <link rel="canonical" href="https://tutoringbyabdullah.xyz/">
@@ -26,8 +26,9 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Fraunces:ital,opsz@0,9..144;1,9..144&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <noscript><style>.cover { display: none; }</style></noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -135,17 +136,30 @@
   </script>
 </head>
 <body>
+  <div class="cover" id="cover" aria-hidden="true">
+    <svg class="cover-mark" viewBox="0 0 512 512" width="132" height="132" fill="none">
+      <circle class="cover-ring" cx="256" cy="252" r="160"/>
+      <circle class="cover-ring" cx="256" cy="252" r="98"/>
+      <circle class="cover-dot" cx="256" cy="252" r="58"/>
+      <polyline class="cover-line" points="97,351 176,322 256,352 338,320 416,350"/>
+    </svg>
+  </div>
+
+  <svg class="sprite" aria-hidden="true" width="0" height="0">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M3 12h17M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-out" viewBox="0 0 24 24"><path d="M6 18 18 6M8 6h10v10" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  </svg>
+
   <canvas class="field" id="field" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
-  <div class="wash" aria-hidden="true"></div>
   <div class="progress" id="progress" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
-    <a class="nav-brand" href="#open">abdullah <em>sultan</em></a>
-    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">
+    <a class="nav-brand" href="#open" data-cursor="top">abdullah <em>sultan</em></a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span>
     </button>
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="#record">record</a>
       <a href="#witness">recommendations</a>
       <a href="#method">approach</a>
@@ -155,7 +169,15 @@
   </header>
 
   <main>
-    <section class="open" id="open" data-chapter="open">
+    <section class="open" id="open">
+      <svg class="open-rings" viewBox="0 0 1000 1000" fill="none" aria-hidden="true">
+        <g>
+          <circle cx="500" cy="500" r="96" vector-effect="non-scaling-stroke"/>
+          <circle cx="500" cy="500" r="228" vector-effect="non-scaling-stroke"/>
+          <circle cx="500" cy="500" r="362" vector-effect="non-scaling-stroke"/>
+          <circle cx="500" cy="500" r="496" vector-effect="non-scaling-stroke"/>
+        </g>
+      </svg>
       <div class="open-stage">
         <p class="open-meta">ais-r · grades 9 and 10 · riyadh</p>
         <h1 class="open-name" aria-label="abdullah sultan">
@@ -170,169 +192,176 @@
       </a>
     </section>
 
-    <section class="thesis" id="thesis" data-chapter="thesis">
-      <div class="thesis-pin">
-        <div class="thesis-inner">
-          <h2 class="thesis-title" aria-label="math and science that finally clicks.">
-            <span class="t-line"><span>math &amp; science</span></span>
-            <span class="t-line"><span>that finally</span></span>
-            <span class="t-line"><span class="italic">clicks.</span></span>
-          </h2>
+    <section class="thesis" id="thesis">
+      <div class="thesis-inner">
+        <h2 class="thesis-title" aria-label="math and science that finally clicks.">
+          <span class="t-line"><span>math &amp; science</span></span>
+          <span class="t-line"><span>that finally</span></span>
+          <span class="t-line"><span class="italic">clicks.</span></span>
+        </h2>
+        <div class="thesis-side">
           <p class="thesis-lede">
             peer tutoring from an ais-r sophomore in the highest math level. clear explanations, calm pace, and help built around the work you’re actually stuck on.
           </p>
           <div class="thesis-actions">
-            <a class="btn" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer" data-magnetic>
+            <a class="btn" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer" data-magnetic data-cursor="dm">
               message on instagram
-              <span aria-hidden="true">→</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
             </a>
             <a class="text-link" href="#record">see the record</a>
           </div>
-          <aside class="thesis-aside" aria-label="session snapshot">
-            <p class="aside-label">now booking</p>
-            <ul class="aside-list">
-              <li><span>starting at</span><strong>40 sar / hr</strong></li>
-              <li><span>courses</span><strong>5 subjects</strong></li>
-              <li><span>placement</span><strong>98%</strong></li>
-              <li><span>group size</span><strong>up to 3</strong></li>
-            </ul>
-          </aside>
         </div>
       </div>
+      <aside class="thesis-aside" aria-label="session snapshot">
+        <p class="aside-label">now booking</p>
+        <ul class="aside-list">
+          <li><span>starting at</span><strong><span data-count="40">40</span> sar / hr</strong></li>
+          <li><span>courses</span><strong>5 subjects</strong></li>
+          <li><span>placement</span><strong><span data-count="98">98</span>%</strong></li>
+          <li><span>group size</span><strong>up to 3</strong></li>
+        </ul>
+      </aside>
     </section>
 
-    <section class="record" id="record" data-chapter="record">
+    <section class="record" id="record">
       <div class="record-pin" id="recordPin">
-        <div class="record-head">
-          <h2 class="section-title record-title">
-            <span class="t-line"><span>the record.</span></span>
-          </h2>
-          <p class="section-lede record-lede">
-            placement, ib, competitions, and awards.
-          </p>
+        <div class="record-side">
+          <div class="record-head">
+            <h2 class="section-title record-title">
+              <span class="t-line"><span>the</span></span>
+              <span class="t-line"><span class="italic">record.</span></span>
+            </h2>
+            <p class="section-lede record-lede">
+              placement, ib, competitions, and awards.
+            </p>
+          </div>
+          <div class="record-meter">
+            <div class="record-hud">
+              <span class="record-count"><span class="roll"><em id="recordStep">01</em></span> / 09</span>
+              <span class="record-hud-tag" id="recordTag">placement</span>
+            </div>
+            <div class="record-bar" aria-hidden="true"><i id="recordBar"></i></div>
+          </div>
         </div>
-        <div class="record-hud" aria-live="polite">
-          <span class="record-count"><em id="recordStep">01</em> / 09</span>
-          <span class="record-hud-tag" id="recordTag">placement</span>
-        </div>
-        <div class="record-bar" aria-hidden="true"><i id="recordBar"></i></div>
-        <div class="record-track" id="recordTrack">
-          <article class="mark is-active" data-tag="placement" data-step="01">
-            <p class="mark-ghost" aria-hidden="true">98</p>
-            <div class="mark-inner">
-              <p class="mark-stat">98<span>%</span></p>
-              <div class="mark-copy">
-                <p class="mark-tag">math placement</p>
-                <h3>placement test</h3>
-                <p>scored 98% on the math placement test.</p>
+        <div class="record-window">
+          <div class="record-track" id="recordTrack">
+            <article class="mark is-active" data-tag="placement" data-step="01">
+              <p class="mark-ghost" aria-hidden="true">98</p>
+              <div class="mark-inner">
+                <p class="mark-stat">98<span>%</span></p>
+                <div class="mark-copy">
+                  <p class="mark-tag">math placement</p>
+                  <h3>placement test</h3>
+                  <p>scored 98% on the math placement test.</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="mark" data-tag="ib math · 10th" data-step="02">
-            <p class="mark-ghost" aria-hidden="true">04</p>
-            <div class="mark-inner">
-              <p class="mark-stat">4</p>
-              <div class="mark-copy">
-                <p class="mark-tag">ib math · grade 10</p>
-                <h3>highest level in the grade</h3>
-                <p>took aa sl in 10th. only 4 kids in the whole grade were in it.</p>
+            <article class="mark" data-tag="ib math · 10th" data-step="02">
+              <p class="mark-ghost" aria-hidden="true">04</p>
+              <div class="mark-inner">
+                <p class="mark-stat">4</p>
+                <div class="mark-copy">
+                  <p class="mark-tag">ib math · grade 10</p>
+                  <h3>highest level in the grade</h3>
+                  <p>took aa sl in 10th. only 4 kids in the whole grade were in it.</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="mark" data-tag="ib hl · now" data-step="03">
-            <p class="mark-ghost" aria-hidden="true">hl</p>
-            <div class="mark-inner">
-              <p class="mark-stat">hl</p>
-              <div class="mark-copy">
-                <p class="mark-tag">ib hl · now</p>
-                <h3>aa hl + bio hl</h3>
-                <p>currently taking analysis &amp; approaches hl and ib biology hl.</p>
+            <article class="mark" data-tag="ib hl · now" data-step="03">
+              <p class="mark-ghost" aria-hidden="true">hl</p>
+              <div class="mark-inner">
+                <p class="mark-stat">hl</p>
+                <div class="mark-copy">
+                  <p class="mark-tag">ib hl · now</p>
+                  <h3>aa hl + bio hl</h3>
+                  <p>currently taking analysis &amp; approaches hl and ib biology hl.</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="mark" data-tag="stem track" data-step="04">
-            <p class="mark-ghost" aria-hidden="true">6</p>
-            <div class="mark-inner">
-              <p class="mark-stat">6<span>th</span></p>
-              <div class="mark-copy">
-                <p class="mark-tag">stem track</p>
-                <h3>advanced maths since sixth</h3>
-                <p>stem has always been my thing. advanced maths since grade 6.</p>
+            <article class="mark" data-tag="stem track" data-step="04">
+              <p class="mark-ghost" aria-hidden="true">6</p>
+              <div class="mark-inner">
+                <p class="mark-stat">6<span>th</span></p>
+                <div class="mark-copy">
+                  <p class="mark-tag">stem track</p>
+                  <h3>advanced maths since sixth</h3>
+                  <p>stem has always been my thing. advanced maths since grade 6.</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="mark" data-tag="competition" data-step="05">
-            <p class="mark-ghost" aria-hidden="true">vi</p>
-            <div class="mark-inner">
-              <p class="mark-stat mark-stat-word">vienna</p>
-              <div class="mark-copy">
-                <p class="mark-tag">ismtf-j</p>
-                <h3>selected for vienna</h3>
-                <p>selected for the ismtf-j math competition at the university in vienna.</p>
+            <article class="mark" data-tag="competition" data-step="05">
+              <p class="mark-ghost" aria-hidden="true">vi</p>
+              <div class="mark-inner">
+                <p class="mark-stat mark-stat-word">vienna</p>
+                <div class="mark-copy">
+                  <p class="mark-tag">ismtf-j</p>
+                  <h3>selected for vienna</h3>
+                  <p>selected for the ismtf-j math competition at the university in vienna.</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="mark" data-tag="ap exam" data-step="06">
-            <p class="mark-ghost" aria-hidden="true">5</p>
-            <div class="mark-inner">
-              <p class="mark-stat">5</p>
-              <div class="mark-copy">
-                <p class="mark-tag">ap precalculus</p>
-                <h3>ap score</h3>
-                <p>got a 5 on ap precalculus.</p>
+            <article class="mark" data-tag="ap exam" data-step="06">
+              <p class="mark-ghost" aria-hidden="true">5</p>
+              <div class="mark-inner">
+                <p class="mark-stat">5</p>
+                <div class="mark-copy">
+                  <p class="mark-tag">ap precalculus</p>
+                  <h3>ap score</h3>
+                  <p>got a 5 on ap precalculus.</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="mark" data-tag="science 10" data-step="07">
-            <p class="mark-ghost" aria-hidden="true">7</p>
-            <div class="mark-inner">
-              <p class="mark-stat">7</p>
-              <div class="mark-copy">
-                <p class="mark-tag">science 10</p>
-                <h3>final grade &amp; exam</h3>
-                <p>7 final grade and 7 on the final exam in grade 10 science.</p>
+            <article class="mark" data-tag="science 10" data-step="07">
+              <p class="mark-ghost" aria-hidden="true">7</p>
+              <div class="mark-inner">
+                <p class="mark-stat">7</p>
+                <div class="mark-copy">
+                  <p class="mark-tag">science 10</p>
+                  <h3>final grade &amp; exam</h3>
+                  <p>7 final grade and 7 on the final exam in grade 10 science.</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="mark" data-tag="aa sl" data-step="08">
-            <p class="mark-ghost" aria-hidden="true">7</p>
-            <div class="mark-inner">
-              <p class="mark-stat">7</p>
-              <div class="mark-copy">
-                <p class="mark-tag">aa sl · grade 10</p>
-                <h3>final grade &amp; exam</h3>
-                <p>7 final grade and 7 on the final exam in aa sl.</p>
+            <article class="mark" data-tag="aa sl" data-step="08">
+              <p class="mark-ghost" aria-hidden="true">7</p>
+              <div class="mark-inner">
+                <p class="mark-stat">7</p>
+                <div class="mark-copy">
+                  <p class="mark-tag">aa sl · grade 10</p>
+                  <h3>final grade &amp; exam</h3>
+                  <p>7 final grade and 7 on the final exam in aa sl.</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="mark" data-tag="award" data-step="09">
-            <p class="mark-ghost" aria-hidden="true">3</p>
-            <div class="mark-inner">
-              <p class="mark-stat">3</p>
-              <div class="mark-copy">
-                <p class="mark-tag">grade 10 award</p>
-                <h3>outstanding achievement</h3>
-                <p>won the outstanding achievement award for grade 10. only three kids in the grade won it.</p>
+            <article class="mark" data-tag="award" data-step="09">
+              <p class="mark-ghost" aria-hidden="true">3</p>
+              <div class="mark-inner">
+                <p class="mark-stat">3</p>
+                <div class="mark-copy">
+                  <p class="mark-tag">grade 10 award</p>
+                  <h3>outstanding achievement</h3>
+                  <p>won the outstanding achievement award for grade 10. only three kids in the grade won it.</p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="witness" id="witness" data-chapter="witness">
-      <div class="witness-intro">
+    <section class="witness" id="witness">
+      <div class="head witness-intro">
         <h2 class="section-title">
           <span class="t-line"><span>people who</span></span>
-          <span class="t-line"><span>know the work.</span></span>
+          <span class="t-line"><span>know <span class="italic">the work.</span></span></span>
         </h2>
         <p class="section-lede">
           a recommendation from a stanford/harvard graduate who has been teaching science at ais-r for almost 20 years, and some thoughts from classmates i’ve helped.
@@ -341,9 +370,9 @@
 
       <article class="cinema">
         <div class="cinema-media">
-          <button class="player" type="button" data-yt="8cN78bOqM8E" data-title="mr. senneff recommendation" aria-label="Play mr. senneff recommendation">
+          <button class="player" type="button" data-yt="8cN78bOqM8E" data-title="mr. senneff recommendation" data-cursor="play" aria-label="Play mr. senneff recommendation">
             <img src="https://i.ytimg.com/vi/8cN78bOqM8E/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
-            <span class="player-play" aria-hidden="true"><i></i></span>
+            <span class="player-play" aria-hidden="true"><b></b><i></i></span>
           </button>
           <div class="cinema-meta">
             <strong>mr. senneff</strong>
@@ -362,9 +391,9 @@
 
       <div class="reel" id="reel">
         <article class="reel-item">
-          <button class="player" type="button" data-yt="ypFCKkdCxBc" data-title="erin kim recommendation" aria-label="Play erin kim recommendation">
-            <img src="https://i.ytimg.com/vi/ypFCKkdCxBc/maxresdefault.jpg" alt="" width="480" height="360" loading="lazy">
-            <span class="player-play" aria-hidden="true"><i></i></span>
+          <button class="player" type="button" data-yt="ypFCKkdCxBc" data-title="erin kim recommendation" data-cursor="play" aria-label="Play erin kim recommendation">
+            <img src="https://i.ytimg.com/vi/ypFCKkdCxBc/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
+            <span class="player-play" aria-hidden="true"><b></b><i></i></span>
           </button>
           <div class="cinema-meta">
             <strong>erin kim</strong>
@@ -372,9 +401,9 @@
           </div>
         </article>
         <article class="reel-item">
-          <button class="player" type="button" data-yt="RDLiD8m-XHA" data-title="edoardo pelati recommendation" aria-label="Play edoardo pelati recommendation">
-            <img src="https://i.ytimg.com/vi/RDLiD8m-XHA/maxresdefault.jpg" alt="" width="480" height="360" loading="lazy">
-            <span class="player-play" aria-hidden="true"><i></i></span>
+          <button class="player" type="button" data-yt="RDLiD8m-XHA" data-title="edoardo pelati recommendation" data-cursor="play" aria-label="Play edoardo pelati recommendation">
+            <img src="https://i.ytimg.com/vi/RDLiD8m-XHA/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
+            <span class="player-play" aria-hidden="true"><b></b><i></i></span>
           </button>
           <div class="cinema-meta">
             <strong>edoardo pelati</strong>
@@ -382,9 +411,9 @@
           </div>
         </article>
         <article class="reel-item">
-          <button class="player" type="button" data-yt="fWpOw5f2-wo" data-title="abdullah al-ashmouny recommendation" aria-label="Play abdullah al-ashmouny recommendation">
-            <img src="https://i.ytimg.com/vi/fWpOw5f2-wo/maxresdefault.jpg" alt="" width="480" height="360" loading="lazy">
-            <span class="player-play" aria-hidden="true"><i></i></span>
+          <button class="player" type="button" data-yt="fWpOw5f2-wo" data-title="abdullah al-ashmouny recommendation" data-cursor="play" aria-label="Play abdullah al-ashmouny recommendation">
+            <img src="https://i.ytimg.com/vi/fWpOw5f2-wo/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
+            <span class="player-play" aria-hidden="true"><b></b><i></i></span>
           </button>
           <div class="cinema-meta">
             <strong>abdullah al-ashmouny</strong>
@@ -392,9 +421,9 @@
           </div>
         </article>
         <article class="reel-item">
-          <button class="player" type="button" data-yt="UE-fREI-XT8" data-title="elijah blackburn recommendation" aria-label="Play elijah blackburn recommendation">
-            <img src="https://i.ytimg.com/vi/UE-fREI-XT8/maxresdefault.jpg" alt="" width="480" height="360" loading="lazy">
-            <span class="player-play" aria-hidden="true"><i></i></span>
+          <button class="player" type="button" data-yt="UE-fREI-XT8" data-title="elijah blackburn recommendation" data-cursor="play" aria-label="Play elijah blackburn recommendation">
+            <img src="https://i.ytimg.com/vi/UE-fREI-XT8/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
+            <span class="player-play" aria-hidden="true"><b></b><i></i></span>
           </button>
           <div class="cinema-meta">
             <strong>elijah blackburn</strong>
@@ -409,157 +438,133 @@
         <span>math i <i>/</i> math ii <i>/</i> math ii/iii <i>/</i> math iii <i>/</i> science 10 <i>/</i></span>
         <span>math i <i>/</i> math ii <i>/</i> math ii/iii <i>/</i> math iii <i>/</i> science 10 <i>/</i></span>
         <span>math i <i>/</i> math ii <i>/</i> math ii/iii <i>/</i> math iii <i>/</i> science 10 <i>/</i></span>
+        <span>math i <i>/</i> math ii <i>/</i> math ii/iii <i>/</i> math iii <i>/</i> science 10 <i>/</i></span>
       </div>
     </div>
 
-    <section class="method" id="method" data-chapter="method">
-      <div class="method-head">
-        <h2 class="section-title">
-          <span class="t-line"><span>four moves</span></span>
-          <span class="t-line"><span class="italic">every session.</span></span>
-        </h2>
-        <p class="section-lede">
-          hi, i’m abdullah, an ais-r junior, aa hl and bio hl student. i was selected to go to the ismtf-j vienna math competition and have been advanced in stem classes since middle school. i’m here to help you consistently get 7s.
-        </p>
-      </div>
+    <section class="method" id="method">
+      <div class="method-inner">
+        <div class="method-head">
+          <h2 class="section-title">
+            <span class="t-line"><span>four moves</span></span>
+            <span class="t-line"><span class="italic">every session.</span></span>
+          </h2>
+          <p class="section-lede">
+            hi, i’m abdullah, an ais-r junior, aa hl and bio hl student. i was selected to go to the ismtf-j vienna math competition and have been advanced in stem classes since middle school. i’m here to help you consistently get 7s.
+          </p>
+        </div>
 
-      <div class="method-pin" id="methodPin">
-        <div class="method-hud" aria-live="polite">
-          <span class="method-count"><em id="methodStep">01</em> / 04</span>
-          <span class="method-hud-tag" id="methodTag">homework help</span>
-        </div>
-        <div class="method-bar" aria-hidden="true"><i id="methodBar"></i></div>
-        <div class="method-track" id="methodTrack">
-          <article class="move is-active" data-tag="homework help" data-step="01">
-            <span class="move-ghost" aria-hidden="true">01</span>
-            <div class="move-inner">
-              <p class="move-index">01</p>
-              <div class="move-copy">
-                <p class="move-tag">homework help</p>
-                <h3>the why before the how</h3>
-                <p>if you can re-derive it, you own it. sessions build intuition first, formulas second, from your actual class material.</p>
-              </div>
+        <ol class="moves">
+          <li class="move rule-b">
+            <p class="move-index" aria-hidden="true"><span>01</span></p>
+            <div class="move-copy">
+              <p class="move-tag">homework help</p>
+              <h3>the why before the how</h3>
+              <p>if you can re-derive it, you own it. sessions build intuition first, formulas second, from your actual class material.</p>
             </div>
-          </article>
-          <article class="move" data-tag="quiz review" data-step="02">
-            <span class="move-ghost" aria-hidden="true">02</span>
-            <div class="move-inner">
-              <p class="move-index">02</p>
-              <div class="move-copy">
-                <p class="move-tag">quiz review</p>
-                <h3>syllabus-aware help</h3>
-                <p>math i through math iii and science 10, taught by someone who took the same classes recently.</p>
-              </div>
+          </li>
+          <li class="move rule-b">
+            <p class="move-index" aria-hidden="true"><span>02</span></p>
+            <div class="move-copy">
+              <p class="move-tag">quiz review</p>
+              <h3>syllabus-aware help</h3>
+              <p>math i through math iii and science 10, taught by someone who took the same classes recently.</p>
             </div>
-          </article>
-          <article class="move" data-tag="test prep" data-step="03">
-            <span class="move-ghost" aria-hidden="true">03</span>
-            <div class="move-inner">
-              <p class="move-index">03</p>
-              <div class="move-copy">
-                <p class="move-tag">test prep</p>
-                <h3>casual and focused</h3>
-                <p>we use your actual work, shared notes, and the questions you’re nervous to ask in class.</p>
-              </div>
+          </li>
+          <li class="move rule-b">
+            <p class="move-index" aria-hidden="true"><span>03</span></p>
+            <div class="move-copy">
+              <p class="move-tag">test prep</p>
+              <h3>casual and focused</h3>
+              <p>we use your actual work, shared notes, and the questions you’re nervous to ask in class.</p>
             </div>
-          </article>
-          <article class="move" data-tag="group · up to 3" data-step="04">
-            <span class="move-ghost" aria-hidden="true">04</span>
-            <div class="move-inner">
-              <p class="move-index">04</p>
-              <div class="move-copy">
-                <p class="move-tag">group · up to 3</p>
-                <h3>test-ready practice</h3>
-                <p>explanations turn into reps, reps turn into confidence, and confidence shows up on quizzes.</p>
-              </div>
+          </li>
+          <li class="move rule-b">
+            <p class="move-index" aria-hidden="true"><span>04</span></p>
+            <div class="move-copy">
+              <p class="move-tag">group · up to 3</p>
+              <h3>test-ready practice</h3>
+              <p>explanations turn into reps, reps turn into confidence, and confidence shows up on quizzes.</p>
             </div>
-          </article>
-        </div>
+          </li>
+        </ol>
       </div>
 
       <div class="creds" aria-label="credentials">
         <div><strong>ais-r</strong><span>school</span></div>
         <div><strong>grade 10</strong><span>year</span></div>
         <div><strong>top 4</strong><span>math level</span></div>
-        <div><strong><span class="count" data-to="98">0</span>%</strong><span>placement</span></div>
+        <div><strong><span data-count="98">98</span>%</strong><span>placement</span></div>
         <div><strong>vienna</strong><span>competition</span></div>
       </div>
     </section>
 
-    <section class="ledger" id="ledger" data-chapter="ledger">
-      <div class="ledger-head">
+    <section class="ledger" id="ledger">
+      <div class="head ledger-head">
         <h2 class="section-title">
           <span class="t-line"><span>what i teach.</span></span>
           <span class="t-line"><span class="italic">what it costs.</span></span>
         </h2>
-        <p class="section-lede">individual rates by subject. group sessions for up to three students. details open as you scroll.</p>
+        <p class="section-lede">individual rates by subject. group sessions for up to three students.</p>
       </div>
 
       <ul class="price-list">
-        <li>
-          <div class="price-row" role="heading" aria-level="3" aria-expanded="false">
+        <li class="price rule-b">
+          <h3 class="price-row">
             <span class="price-name">math i</span>
             <span class="price-line" aria-hidden="true"></span>
-            <span class="price-cost">40 <em>sar / hr</em></span>
-          </div>
-          <div class="price-detail">
-            <p>solving systems, linear functions, and intro algebra.</p>
-          </div>
+            <span class="price-cost"><span class="price-num"><span data-count="40">40</span></span> <em>sar / hr</em></span>
+          </h3>
+          <p class="price-detail">solving systems, linear functions, and intro algebra.</p>
         </li>
-        <li>
-          <div class="price-row" role="heading" aria-level="3" aria-expanded="false">
+        <li class="price rule-b">
+          <h3 class="price-row">
             <span class="price-name">math ii</span>
             <span class="price-line" aria-hidden="true"></span>
-            <span class="price-cost">40 <em>sar / hr</em></span>
-          </div>
-          <div class="price-detail">
-            <p>quadratics, sequences, and trig foundations.</p>
-          </div>
+            <span class="price-cost"><span class="price-num"><span data-count="40">40</span></span> <em>sar / hr</em></span>
+          </h3>
+          <p class="price-detail">quadratics, sequences, and trig foundations.</p>
         </li>
-        <li>
-          <div class="price-row" role="heading" aria-level="3" aria-expanded="false">
+        <li class="price rule-b">
+          <h3 class="price-row">
             <span class="price-name">math ii/iii</span>
             <span class="price-line" aria-hidden="true"></span>
-            <span class="price-cost">55 <em>sar / hr</em></span>
-          </div>
-          <div class="price-detail">
-            <p>functions, polynomials, and advanced trig.</p>
-          </div>
+            <span class="price-cost"><span class="price-num"><span data-count="55">55</span></span> <em>sar / hr</em></span>
+          </h3>
+          <p class="price-detail">functions, polynomials, and advanced trig.</p>
         </li>
-        <li>
-          <div class="price-row" role="heading" aria-level="3" aria-expanded="false">
+        <li class="price rule-b">
+          <h3 class="price-row">
             <span class="price-name">math iii</span>
             <span class="price-line" aria-hidden="true"></span>
-            <span class="price-cost">55 <em>sar / hr</em></span>
-          </div>
-          <div class="price-detail">
-            <p>precalculus, logs, exponentials, and series.</p>
-          </div>
+            <span class="price-cost"><span class="price-num"><span data-count="55">55</span></span> <em>sar / hr</em></span>
+          </h3>
+          <p class="price-detail">precalculus, logs, exponentials, and series.</p>
         </li>
-        <li>
-          <div class="price-row" role="heading" aria-level="3" aria-expanded="false">
+        <li class="price rule-b">
+          <h3 class="price-row">
             <span class="price-name">science 10</span>
             <span class="price-line" aria-hidden="true"></span>
-            <span class="price-cost">60 <em>sar / hr</em></span>
-          </div>
-          <div class="price-detail">
-            <p>biology: cells, genetics, ecology, body systems.</p>
-          </div>
+            <span class="price-cost"><span class="price-num"><span data-count="60">60</span></span> <em>sar / hr</em></span>
+          </h3>
+          <p class="price-detail">biology: cells, genetics, ecology, body systems.</p>
         </li>
       </ul>
 
       <aside class="group-note">
-        <h3>group sessions</h3>
-        <p>bring friends. price = people × the subject’s hourly rate, plus 5 riyals for each additional person after the first.</p>
+        <div class="group-copy">
+          <h3>group sessions</h3>
+          <p>bring friends. price = people × the subject’s hourly rate, plus 5 riyals for each additional person after the first.</p>
+        </div>
         <ul>
-          <li><span>1 person</span><strong>rate</strong></li>
-          <li><span>2 people</span><strong>2× rate + 5</strong></li>
-          <li><span>3 people</span><strong>3× rate + 10</strong></li>
+          <li class="rule-b"><span>1 person</span><strong>rate</strong></li>
+          <li class="rule-b"><span>2 people</span><strong>2× rate + 5</strong></li>
+          <li class="rule-b"><span>3 people</span><strong>3× rate + 10</strong></li>
         </ul>
       </aside>
     </section>
 
-    <section class="book" id="book" data-chapter="book">
+    <section class="book" id="book">
       <div class="book-stage">
         <h2 class="book-title">
           <span class="t-line"><span>dm me.</span></span>
@@ -568,41 +573,44 @@
         <p class="book-lede">
           tell me what subject you need help with, what topic you’re struggling on, when you want to meet, and if you want to go solo or with your friends. i usually reply pretty quickly.
         </p>
-        <a class="btn btn-lg" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer" data-magnetic>
+        <a class="btn btn-lg" href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer" data-magnetic data-cursor="dm">
           open instagram
-          <span aria-hidden="true">→</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
       </div>
 
       <ul class="reach">
-        <li>
-          <a href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer">
+        <li class="rule-b">
+          <a href="https://instagram.com/a.m.sultan_" target="_blank" rel="noreferrer" data-cursor="dm">
             <span>instagram</span>
             <strong>@a.m.sultan_</strong>
+            <span class="swap" aria-hidden="true"><svg class="icon"><use href="#i-out"/></svg></span>
           </a>
         </li>
-        <li>
+        <li class="rule-b">
           <div>
             <span>snapchat</span>
             <strong>abdullahmsultan</strong>
           </div>
         </li>
-        <li>
+        <li class="rule-b">
           <div>
             <span>ais-r campus</span>
             <strong>find me in person</strong>
           </div>
         </li>
-        <li>
-          <a href="https://www.amsultan.site" target="_blank" rel="noreferrer">
+        <li class="rule-b">
+          <a href="https://www.amsultan.site" target="_blank" rel="noreferrer" data-cursor="open">
             <span>personal site</span>
             <strong>amsultan.site</strong>
+            <span class="swap" aria-hidden="true"><svg class="icon"><use href="#i-out"/></svg></span>
           </a>
         </li>
-        <li>
-          <a href="https://www.linkedin.com/in/amsultan2010" target="_blank" rel="noreferrer">
+        <li class="rule-b">
+          <a href="https://www.linkedin.com/in/amsultan2010" target="_blank" rel="noreferrer" data-cursor="open">
             <span>linkedin</span>
             <strong>amsultan2010</strong>
+            <span class="swap" aria-hidden="true"><svg class="icon"><use href="#i-out"/></svg></span>
           </a>
         </li>
       </ul>
@@ -621,8 +629,13 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/vendor/SplitText.min.js" defer></script>
+  <script src="js/vendor/CustomEase.min.js" defer></script>
+  <script src="js/vendor/DrawSVGPlugin.min.js" defer></script>
+  <script src="js/vendor/lenis.min.js" defer></script>
+  <script type="module" src="js/base.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
