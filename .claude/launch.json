@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "tutoring-static", "runtimeExecutable": "python3", "runtimeArgs": ["-m", "http.server", "4371"], "port": 4371 }
+  ]
+}
